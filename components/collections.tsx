@@ -119,31 +119,31 @@ export default function Collections() {
   }
 
   return (
-    <section id="products" className="py-24 bg-white relative">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="products" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Decorative elements */}
         <div className="absolute top-12 left-1/4 w-px h-32 bg-gradient-to-b from-black/20 to-transparent" />
         <div className="absolute top-12 right-1/4 w-px h-32 bg-gradient-to-b from-black/20 to-transparent" />
         
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-block px-6 py-2 border border-black/30 rounded-full mb-6">
-            <h2 className="text-black text-sm tracking-[0.3em] font-light">FEATURED PRODUCTS</h2>
+          <div className="inline-block px-4 sm:px-6 py-2 border border-black/30 rounded-full mb-4 sm:mb-6">
+            <h2 className="text-black text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] font-light">WE ARE OFFERING</h2>
           </div>
-          <h3 className="text-5xl md:text-6xl font-bold text-black mb-4 font-playfair">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 font-playfair">
             Our Premium
-            <span className="block text-gray-600">Products</span>
+            <span className="block text-black">Products</span>
           </h3>
-          <div className="w-24 h-px bg-black mx-auto" />
+          <div className="w-16 sm:w-24 h-px bg-black mx-auto" />
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-7xl mx-auto"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -153,11 +153,11 @@ export default function Collections() {
             <motion.div
               key={product.id}
               variants={itemVariants}
-              className="group cursor-pointer bg-white text-center border border-transparent hover:border-black transition-all duration-300 p-4 rounded-sm"
+              className="group cursor-pointer bg-white text-center border border-transparent hover:border-black transition-all duration-300 p-2 sm:p-3 md:p-4 rounded-sm"
               whileHover={{ y: -5 }}
               onClick={() => setSelectedProduct(product)}
             >
-              <div className="relative overflow-hidden bg-white h-48 mb-4">
+              <div className="relative overflow-hidden bg-white h-32 sm:h-40 md:h-48 mb-2 sm:mb-3 md:mb-4">
                 <Image
                   src={product.image}
                   alt={product.title}
@@ -167,10 +167,10 @@ export default function Collections() {
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-black font-semibold text-base">
+                <h4 className="text-black font-semibold text-xs sm:text-sm md:text-base leading-tight">
                   {product.title}
                 </h4>
-                <p className="text-gray-500 text-sm">{product.category}</p>
+                <p className="text-black/70 text-xs sm:text-sm">{product.category}</p>
               </div>
             </motion.div>
           ))}
@@ -234,12 +234,9 @@ export default function Collections() {
                     </ul>
                   </div>
                   
-                  <div className="flex gap-4 mt-8">
-                    <button className="flex-1 px-6 py-3 bg-black text-white font-semibold tracking-wider hover:bg-gray-800 transition-colors rounded-sm">
+                  <div className="mt-8">
+                    <button className="w-full px-6 py-3 bg-black text-white font-semibold tracking-wider hover:bg-gray-800 transition-colors rounded-sm">
                       Request Quote
-                    </button>
-                    <button className="flex-1 px-6 py-3 border-2 border-black text-black font-semibold tracking-wider hover:bg-black hover:text-white transition-all duration-300 rounded-sm">
-                      Download Specs
                     </button>
                   </div>
                 </div>

@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react"
 import Navbar from "@/components/navbar"
 import Hero from "@/components/hero"
+import PrecisionSection from "@/components/precision-section"
 import About from "@/components/about"
 import Stats from "@/components/stats"
 import Collections from "@/components/collections"
+import AdditionalServices from "@/components/additional-services"
 import WhyChooseUs from "@/components/why-choose-us"
 import Story from "@/components/story"
 import Footer from "@/components/footer"
@@ -23,12 +25,13 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="bg-background">
+    <main className="bg-background overflow-x-hidden">
       <Navbar isScrolled={isScrolled} />
       <Hero />
       <About />
       <Stats />
       <Collections />
+      <AdditionalServices />
       <WhyChooseUs />
       <Story />
       <Footer />

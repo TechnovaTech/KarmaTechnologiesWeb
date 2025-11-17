@@ -23,18 +23,18 @@ export default function About() {
   }
 
   return (
-    <section id="about" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          <motion.div variants={itemVariants} className="relative">
+          <motion.div variants={itemVariants} className="relative order-2 lg:order-1">
             {/* Top image - building */}
-            <div className="relative w-[500px] h-[500px] overflow-hidden shadow-lg z-10">
+            <div className="relative w-full max-w-[400px] sm:max-w-[450px] md:max-w-[500px] h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[500px] overflow-hidden shadow-lg z-10 mx-auto lg:mx-0">
               <Image
                 src="https://theseveneleven.in/wp-content/uploads/2024/11/services-2.jpg"
                 alt="Seven Eleven facility"
@@ -44,7 +44,7 @@ export default function About() {
             </div>
             
             {/* Bottom overlapping image - machinery */}
-            <div className="absolute top-[420px] left-[200px] w-[320px] h-[200px] overflow-hidden shadow-2xl z-20">
+            <div className="absolute top-[240px] sm:top-[280px] md:top-[320px] lg:top-[360px] xl:top-[420px] left-[120px] sm:left-[140px] md:left-[160px] lg:left-[180px] xl:left-[200px] w-[200px] sm:w-[240px] md:w-[280px] lg:w-[300px] xl:w-[320px] h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] xl:h-[200px] overflow-hidden shadow-2xl z-20">
               <Image
                 src="https://theseveneleven.in/wp-content/uploads/2024/12/abt-image01.jpg"
                 alt="Manufacturing machinery"
@@ -55,10 +55,10 @@ export default function About() {
           </motion.div>
 
           {/* Text Content */}
-          <motion.div variants={containerVariants} className="space-y-6">
+          <motion.div variants={containerVariants} className="space-y-4 sm:space-y-6 order-1 lg:order-2">
             <motion.div variants={itemVariants}>
               <h2 className="text-primary mb-2 text-sm tracking-widest">ABOUT COMPANY</h2>
-              <h3 className="text-foreground mb-6 font-playfair font-bold text-4xl">Who We Are</h3>
+              <h3 className="text-foreground mb-4 sm:mb-6 font-playfair font-bold text-2xl sm:text-3xl md:text-4xl">Who We Are</h3>
             </motion.div>
 
             <motion.p variants={itemVariants} className="text-gray-700 leading-relaxed text-lg">
