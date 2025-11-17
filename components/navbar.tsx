@@ -13,19 +13,19 @@ export default function Navbar({ isScrolled }: NavbarProps) {
 
   return (
     <motion.nav
-      className="fixed top-0 w-full z-50 transition-all duration-500 bg-white/95 backdrop-blur-sm border-b border-primary/10 shadow-sm"
+      className="fixed top-0 w-full py-3 z-50 transition-all duration-500 bg-white/95 backdrop-blur-sm border-b border-primary/10 shadow-sm"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6  flex items-center justify-between">
         <motion.a
           href="/"
           className="transition-colors duration-300"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >
-          <Image src="/logo.png" alt="Karma Mech Tech" width={60} height={60} className="sm:w-[70px] sm:h-[70px] md:w-[80px] md:h-[80px] object-contain" />
+          <Image src="/logo.png" alt="Karma Mech Tech" width={90} height={90} className="sm:w-[150px] sm:h-[100px] md:w-[160px] md:h-[100px] object-contain" />
         </motion.a>
 
         {/* Desktop Menu */}

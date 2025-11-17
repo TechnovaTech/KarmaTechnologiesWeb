@@ -60,8 +60,8 @@ export default function AdditionalServices() {
             <h2 className="text-primary text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] font-light">ADDITIONAL SERVICES</h2>
           </div>
           <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 font-playfair">
-            Complete
-            <span className="block text-primary">Solutions</span>
+            Complete Solutions
+            <span className="block text-primary"></span>
           </h3>
           <div className="w-16 sm:w-24 h-px bg-primary mx-auto" />
         </motion.div>

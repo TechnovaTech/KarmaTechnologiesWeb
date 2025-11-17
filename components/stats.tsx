@@ -2,12 +2,13 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { useState, useEffect } from "react"
 
 const stats = [
-  { number: "15+", label: "Years In Business", bg: "bg-black text-white" },
-  { number: "1.5k", label: "Happy Clients", bg: "bg-gray-100 text-black" },
-  { number: "50+", label: "Products", bg: "bg-black text-white" },
-  { number: "80+", label: "Trained Staff", bg: "bg-gray-100 text-black" }
+  { number: "15+", target: 15, label: "Years In Business", bg: "bg-black text-white" },
+  { number: "1.5k", target: 1500, label: "Happy Clients", bg: "bg-gray-100 text-black" },
+  { number: "50+", target: 50, label: "Products", bg: "bg-black text-white" },
+  { number: "80+", target: 80, label: "Trained Staff", bg: "bg-gray-100 text-black" }
 ]
 
 const services = [
@@ -16,6 +17,59 @@ const services = [
   "Quality Control",
   "Custom Solutions"
 ]
+
+interface CountingNumberProps {
+  target: number
+  suffix?: string
+  duration?: number
+}
+
+function CountingNumber({ target, suffix = "", duration = 2000 }: CountingNumberProps) {
+  const [count, setCount] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    if (!isVisible) return
+
+    let startTime: number
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime
+      const progress = Math.min((currentTime - startTime) / duration, 1)
+      
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+      const currentCount = Math.floor(easeOutQuart * target)
+      
+      setCount(currentCount)
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+    
+    requestAnimationFrame(animate)
+  }, [isVisible, target, duration])
+
+  const formatNumber = (num: number) => {
+    if (target >= 1000) {
+      return (num / 1000).toFixed(1) + "k"
+    }
+    return num.toString()
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      onViewportEnter={() => setIsVisible(true)}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <h3 className="text-4xl font-bold mb-2">
+        {formatNumber(count)}{suffix}
+      </h3>
+    </motion.div>
+  )
+}
 
 export default function Stats() {
   const containerVariants = {
@@ -61,7 +115,10 @@ export default function Stats() {
                 variants={itemVariants}
                 className={`${stat.bg} p-8 text-center`}
               >
-                <h3 className="text-4xl font-bold mb-2">{stat.number}</h3>
+                <CountingNumber 
+                  target={stat.target} 
+                  suffix={stat.target >= 1000 ? "" : "+"}
+                />
                 <p className="text-sm tracking-wider">{stat.label}</p>
               </motion.div>
             ))}

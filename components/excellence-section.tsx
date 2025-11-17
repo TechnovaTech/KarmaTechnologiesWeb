@@ -47,7 +47,8 @@ export default function ExcellenceSection() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >
-            GET IN TOUCH
+            <a href="/contact">GET IN TOUCH</a>
+            
           </motion.button>
         </div>
       </div>

@@ -136,8 +136,8 @@ export default function Collections() {
             <h2 className="text-black text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] font-light">WE ARE OFFERING</h2>
           </div>
           <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 font-playfair">
-            Our Premium
-            <span className="block text-black">Products</span>
+            Our Premium Products
+            <span className="block text-black"></span>
           </h3>
           <div className="w-16 sm:w-24 h-px bg-black mx-auto" />
         </motion.div>

@@ -26,7 +26,7 @@ export default function QuoteHero() {
           
           
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 font-playfair">
-             Quotes
+            Request Quotes
           </h1>
           
           

@@ -86,8 +86,10 @@ export default function About() {
               whileHover={{ x: 5 }}
               whileTap={{ scale: 0.98 }}
               suppressHydrationWarning={true}
+              
             >
-              READ MORE
+              <a href="/about">              READ MORE
+</a>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

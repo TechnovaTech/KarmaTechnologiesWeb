@@ -17,9 +17,10 @@ export default function ProductsGrid() {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("All")
   const [showSuccess, setShowSuccess] = useState(false)
   const [successMessage, setSuccessMessage] = useState("")
-  const productsPerPage = 32
+  const productsPerPage = 12
 
   // 31 Detailed Products
   const allProducts: Product[] = [
@@ -242,11 +243,16 @@ export default function ProductsGrid() {
     }
   ]
 
-  // Filter products based on search term
-  const filteredProducts = allProducts.filter(product =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.category.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  // Get unique categories
+  const categories = ["All", ...Array.from(new Set(allProducts.map(product => product.category)))]
+
+  // Filter products based on search term and category
+  const filteredProducts = allProducts.filter(product => {
+    const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         product.category.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesCategory = selectedCategory === "All" || product.category === selectedCategory
+    return matchesSearch && matchesCategory
+  })
 
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
   const startIndex = (currentPage - 1) * productsPerPage
@@ -316,110 +322,152 @@ export default function ProductsGrid() {
             <h2 className="text-primary text-sm tracking-[0.3em] font-light">FEATURED PRODUCTS</h2>
           </div>
           <h3 className="text-5xl md:text-6xl font-bold text-foreground mb-4 font-playfair">
-            Our Premium
-            <span className="block text-muted-foreground">Products</span>
+            Our Premium Products
+            <span className="block text-muted-foreground"></span>
           </h3>
           <div className="w-24 h-px bg-primary mx-auto" />
         </motion.div>
 
-        {/* Search Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-md mx-auto mb-12"
-        >
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchTerm}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-              suppressHydrationWarning
-            />
-          </div>
-        </motion.div>
+        {/* Main Content with Sidebar */}
+        <div className="grid lg:grid-cols-4 gap-8">
+          {/* Sidebar */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-1"
+          >
+            <div className="bg-card p-6 border border-border rounded-lg sticky top-24">
+              {/* Search */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-foreground mb-4">Search Products</h3>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChange={(e) => handleSearchChange(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
+                    suppressHydrationWarning
+                  />
+                </div>
+              </div>
 
-        {/* Products Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          key={`${currentPage}-${searchTerm}`}
-        >
-          {currentProducts.map((product) => (
+              {/* Categories Filter */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-foreground mb-4">Categories</h3>
+                <div className="space-y-2">
+                  {categories.map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => {
+                        setSelectedCategory(category)
+                        setCurrentPage(1)
+                      }}
+                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
+                        selectedCategory === category
+                          ? 'bg-primary text-primary-foreground'
+                          : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Product Count */}
+              <div className="border-t border-border pt-4">
+                <div className="text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">{filteredProducts.length}</span> products found
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Products Grid */}
+          <div className="lg:col-span-3">
             <motion.div
-              key={product.id}
-              variants={itemVariants}
-              className="group cursor-pointer bg-white text-center border border-transparent hover:border-black transition-all duration-300 p-4 rounded-sm"
-              whileHover={{ y: -5 }}
-              onClick={() => setSelectedProduct(product)}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              key={`${currentPage}-${searchTerm}-${selectedCategory}`}
             >
-              <div className="relative overflow-hidden bg-background h-64 mb-4">
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  className="object-contain group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
+              {currentProducts.map((product) => (
+                <motion.div
+                  key={product.id}
+                  variants={itemVariants}
+                  className="group cursor-pointer bg-white text-center border border-transparent hover:border-black transition-all duration-300 p-2 sm:p-3 md:p-4 rounded-sm"
+                  whileHover={{ y: -5 }}
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  <div className="relative overflow-hidden bg-background h-48 mb-4 rounded-md">
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
 
-              <div className="space-y-2">
-                <h4 className="text-foreground font-semibold text-base">
-                  {product.title}
-                </h4>
-                <p className="text-muted-foreground text-sm">{product.category}</p>
-              </div>
+                  <div className="space-y-2">
+                    <h4 className="text-foreground font-semibold text-sm line-clamp-2">
+                      {product.title}
+                    </h4>
+                    <p className="text-muted-foreground text-xs">{product.category}</p>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </motion.div>
 
-        {/* Results Info */}
-        <div className="text-center mt-8 mb-4">
-          <p className="text-muted-foreground">
-            Showing {currentProducts.length} of {filteredProducts.length} products
-            {searchTerm && ` for "${searchTerm}"`}
-          </p>
-        </div>
+            {/* Results Info */}
+            <div className="text-center mt-8 mb-4">
+              <p className="text-muted-foreground">
+                Showing {currentProducts.length} of {filteredProducts.length} products
+                {searchTerm && ` for "${searchTerm}"`}
+                {selectedCategory !== "All" && ` in ${selectedCategory}`}
+              </p>
+            </div>
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mt-8">
-          <button
-            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="px-4 py-2 border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Previous
-          </button>
-          
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={`w-10 h-10 border transition-colors ${
-                currentPage === page
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'border-border text-foreground hover:bg-primary hover:text-primary-foreground'
-              }`}
-            >
-              {page}
-            </button>
-          ))}
-          
-          <button
-            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Next
-          </button>
+            {/* Pagination */}
+            {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2 mt-8">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-md"
+              >
+                Previous
+              </button>
+              
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`w-10 h-10 border transition-colors rounded-md ${
+                    currentPage === page
+                      ? 'bg-primary text-primary-foreground border-primary'
+                      : 'border-border text-foreground hover:bg-primary hover:text-primary-foreground'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+              
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-md"
+              >
+                Next
+              </button>
+            </div>
+            )}
+          </div>
         </div>
-        )}
       </div>
 
       {/* Product Detail Modal */}

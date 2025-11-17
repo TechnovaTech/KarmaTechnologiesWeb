@@ -97,8 +97,8 @@ export default function WhyChooseUs() {
             <h2 className="text-black text-sm tracking-[0.3em] font-light">WHY CHOOSE US</h2>
           </div>
           <h3 className="text-5xl md:text-6xl font-bold text-black mb-4 font-playfair">
-            Six Reasons For People
-            <span className="block text-gray-600">Choosing Us</span>
+            Six Reasons For People For Choosing Us
+            <span className="block text-gray-600"></span>
           </h3>
           <div className="w-24 h-px bg-black mx-auto" />
         </motion.div>

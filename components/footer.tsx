@@ -129,14 +129,9 @@ export default function Footer() {
             <h4 className="text-sm font-semibold tracking-widest text-black mb-4 uppercase">Get In Touch</h4>
             <div className="space-y-3 mb-6">
               <div>
-                <p className="text-sm text-gray-600 font-semibold">Founder:</p>
-                <p className="text-sm text-gray-600">Yash Sutariya</p>
-                <p className="text-sm text-gray-600">Paras Limbasiya</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 font-semibold">Phone:</p>
-                <p className="text-sm text-gray-600">+1(438)459-7766</p>
-                <p className="text-sm text-gray-600">+1(438)459-7755</p>
+                <p className="text-sm text-gray-600 font-semibold">Founders:</p>
+                <p className="text-sm text-gray-600 mb-3">Yash Sutariya: <br/> +1(438)459-7766</p>
+                <p className="text-sm text-gray-600">Paras Limbasiya: <br/> +1(438)459-7755</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600 font-semibold">Address:</p>

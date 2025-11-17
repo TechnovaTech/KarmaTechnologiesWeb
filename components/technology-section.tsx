@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export default function TechnologySection() {
   const containerVariants = {
@@ -31,29 +32,30 @@ export default function TechnologySection() {
           viewport={{ once: true }}
           variants={containerVariants}
         >
-          <div className="mb-12">
-            <motion.div 
-              variants={itemVariants}
-              className="w-20 h-1 bg-primary mb-6"
-            />
-            <motion.p 
-              variants={itemVariants}
-              className="text-primary text-lg font-semibold mb-6 tracking-wider"
-            >
-              Technology and Product Categories
-            </motion.p>
-            <motion.h2 
-              variants={itemVariants}
-              className="text-4xl md:text-5xl font-bold text-foreground mb-12 font-playfair leading-tight"
-            >
-              Available technologies and product categories include:
-            </motion.h2>
-          </div>
-          
-          <motion.div 
-            variants={containerVariants}
-            className="space-y-4 text-muted-foreground"
-          >
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <motion.div 
+                variants={itemVariants}
+                className="w-20 h-1 bg-primary mb-6"
+              />
+              <motion.p 
+                variants={itemVariants}
+                className="text-primary text-lg font-semibold mb-6 tracking-wider"
+              >
+                Technology and Product Categories
+              </motion.p>
+              <motion.h2 
+                variants={itemVariants}
+                className="text-4xl md:text-5xl font-bold text-foreground mb-12 font-playfair leading-tight"
+              >
+                Available technologies and product categories include:
+              </motion.h2>
+              
+              <motion.div 
+                variants={containerVariants}
+                className="space-y-4 text-muted-foreground"
+              >
             {[
               "Multistation Thermoforming Machines",
               "Extrusion Coating and Lamination Lines",
@@ -78,7 +80,23 @@ export default function TechnologySection() {
                 <span className="text-lg leading-relaxed">{item}</span>
               </motion.div>
             ))}
-          </motion.div>
+              </motion.div>
+            </div>
+            
+            {/* Right Image */}
+            <motion.div 
+              variants={itemVariants}
+              className="relative h-[500px] lg:h-[600px] overflow-hidden rounded-lg shadow-2xl"
+            >
+              <Image
+                src="https://theseveneleven.in/wp-content/uploads/2024/12/abt-image01.jpg"
+                alt="Advanced manufacturing technology and machinery"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
