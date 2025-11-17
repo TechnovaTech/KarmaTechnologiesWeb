@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
+import { NextRequest } from 'next/server'
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
   try {
     const { name, email, subject, message } = await request.json()
     
@@ -40,6 +41,6 @@ export async function POST(request) {
     return Response.json({ success: true })
   } catch (error) {
     console.error('Email Error:', error)
-    return Response.json({ success: false, error: error.message })
+    return Response.json({ success: false, error: error instanceof Error ? error.message : 'Unknown error' })
   }
 }

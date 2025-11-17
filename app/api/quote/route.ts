@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
+import { NextRequest } from 'next/server'
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
   try {
     const { formData, quoteItems } = await request.json()
     
@@ -13,7 +14,7 @@ export async function POST(request) {
     })
 
     // Generate products list HTML
-    const productsHtml = quoteItems.map(item => `
+    const productsHtml = quoteItems.map((item: any) => `
       <tr style="border-bottom: 1px solid #eee;">
         <td style="padding: 10px; text-align: left;">${item.title}</td>
         <td style="padding: 10px; text-align: center;">${item.category}</td>
@@ -67,6 +68,6 @@ export async function POST(request) {
     return Response.json({ success: true })
   } catch (error) {
     console.error('Quote Email Error:', error)
-    return Response.json({ success: false, error: error.message })
+    return Response.json({ success: false, error: error instanceof Error ? error.message : 'Unknown error' })
   }
 }

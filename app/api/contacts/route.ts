@@ -4,8 +4,8 @@ import nodemailer from 'nodemailer'
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017'
 const dbName = process.env.MONGODB_DB || 'casting_website'
 
-let client
-let clientPromise
+let client: MongoClient | undefined
+let clientPromise: Promise<MongoClient>
 
 if (!client) {
   client = new MongoClient(uri)
@@ -13,7 +13,7 @@ if (!client) {
 }
 
 async function sendContactEmail(contactData: any) {
-  const transporter = nodemailer.createTransporter({
+  const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER,
@@ -49,7 +49,7 @@ async function sendContactEmail(contactData: any) {
     return { success: true }
   } catch (error) {
     console.error('Email send error:', error)
-    return { success: false, error: error.message }
+    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }
 
