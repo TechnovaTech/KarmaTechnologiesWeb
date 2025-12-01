@@ -135,7 +135,7 @@ export default function Collections() {
           transition={{ duration: 0.8 }}
         >
           <div className="inline-block px-4 sm:px-6 py-2 border border-black/30 rounded-full mb-4 sm:mb-6">
-            <h2 className="text-black text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] font-light">WE ARE OFFERING</h2>
+            <h2 className="text-black text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] font-light">Our Collections</h2>
           </div>
           <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 font-playfair">
             Our Premium Products

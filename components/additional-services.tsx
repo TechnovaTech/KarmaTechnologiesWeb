@@ -1,26 +1,26 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Wrench, Cog, Shield, Truck } from "lucide-react"
+import Image from "next/image"
 
 const services = [
   {
-    icon: Wrench,
+    image: "/s1.png",
     title: "Custom Manufacturing",
     description: "Tailored precision manufacturing solutions for your specific requirements and applications."
   },
   {
-    icon: Cog,
+    image: "/s2.png",
     title: "Engineering Support",
     description: "Expert engineering consultation and technical support throughout your project lifecycle."
   },
   {
-    icon: Shield,
+    image: "/s3.png",
     title: "Quality Assurance",
     description: "Comprehensive quality control and testing to ensure products meet industry standards."
   },
   {
-    icon: Truck,
+    image: "/s4.png",
     title: "Global Delivery",
     description: "Reliable worldwide shipping and logistics support for timely project completion."
   }
@@ -80,8 +80,14 @@ export default function AdditionalServices() {
               className="bg-white p-6 sm:p-8 text-center border border-border hover:border-primary transition-all duration-300 group"
               whileHover={{ y: -5 }}
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:bg-primary transition-colors duration-300">
-                <service.icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary group-hover:text-white transition-colors duration-300" />
+              <div className="w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mx-auto mb-4 sm:mb-6 overflow-hidden">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  width={150}
+                  height={150}
+                  className="object-contain"
+                />
               </div>
               <h4 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
                 {service.title}

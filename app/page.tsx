@@ -7,7 +7,10 @@ import PrecisionSection from "@/components/precision-section"
 import About from "@/components/about"
 import Stats from "@/components/stats"
 import Collections from "@/components/collections"
+import BusinessRelationships from "@/components/business-relationships"
 import AdditionalServices from "@/components/additional-services"
+import OurAbilities from "@/components/our-abilities"
+import NewsletterTestimonials from "@/components/newsletter-testimonials"
 import WhyChooseUs from "@/components/why-choose-us"
 import Story from "@/components/story"
 import Footer from "@/components/footer"
@@ -33,9 +36,11 @@ export default function Home() {
         <About />
         <Stats />
         <Collections />
+        <OurAbilities />
         <AdditionalServices />
+        <BusinessRelationships />
         <WhyChooseUs />
-        <Story />
+        <NewsletterTestimonials />
         <Footer />
       </main>
     </QuoteProvider>

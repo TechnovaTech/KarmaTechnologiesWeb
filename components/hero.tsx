@@ -130,7 +130,7 @@ export default function Hero() {
                   <Link href="/contact" className="w-38 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors duration-300 inline-block text-center">
                     Contacts
                   </Link>
-                  <button className="w-38 px-6 py-3 bg-orange-500 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors duration-300">
+                  <button className="w-38 px-6 py-3 bg-orange-500 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors duration-300" suppressHydrationWarning>
                     Brochure
                   </button>
                 </div>

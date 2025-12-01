@@ -3,99 +3,104 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 
+const services = [
+  {
+    icon: "🔧",
+    title: "Precise CNC Machine Component From Roundbar And Forgings."
+  },
+  {
+    icon: "⚙️", 
+    title: "Ferrous & Non Ferrous Material Machined Components."
+  },
+  {
+    icon: "🔩",
+    title: "Stainless Steel Components."
+  },
+  {
+    icon: "🏭",
+    title: "Alloy Steel Machined Components."
+  }
+]
+
 export default function About() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.8 },
-    },
-  }
-
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden">
+    <section id="about" className="relative -mt-32 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <motion.div variants={itemVariants} className="relative order-2 lg:order-1">
-            {/* Top image - building */}
-            <div className="relative w-full max-w-[400px] sm:max-w-[450px] md:max-w-[500px] h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[500px] overflow-hidden shadow-lg z-10 mx-auto lg:mx-0">
-              <Image
-                src="https://theseveneleven.in/wp-content/uploads/2024/11/services-2.jpg"
-                alt="Seven Eleven facility"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-            
-            {/* Bottom overlapping image - machinery */}
-            <div className="absolute top-[240px] sm:top-[280px] md:top-[320px] lg:top-[360px] xl:top-[420px] left-[120px] sm:left-[140px] md:left-[160px] lg:left-[180px] xl:left-[200px] w-[200px] sm:w-[240px] md:w-[280px] lg:w-[300px] xl:w-[320px] h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] xl:h-[200px] overflow-hidden shadow-2xl z-20">
-              <Image
-                src="https://theseveneleven.in/wp-content/uploads/2024/12/abt-image01.jpg"
-                alt="Manufacturing machinery"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-          </motion.div>
+        <div className="bg-white shadow-xl p-8 md:p-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left Side - Introduction */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              
+              
+              <h2 className="text-3xl font-bold text-black mb-6 leading-tight">
+                About Karma Technologies
+              </h2>
+              
+              <div className="space-y-4 text-black leading-relaxed">
+                <p >
+                  Karma Technologies is one of the leading manufacturers of precision machined 
+                  components based in Canada. The company was founded 
+                  with the vision and commitment to provide excellent quality products and 
+                  services to customers. We are precision engineering company with range 
+                  of finest cnc machines in India.
+                </p>
+                
+                <p>
+                  We are delighted to offer authentic CNC parts, industrial components, and 
+                  much more in addition to our practical experience in machine repair. The 
+                  whole range of the cut, band, and bore operations, as well as many more 
+                  specialized machine types including wide belt sanders, boring machines, 
+                  dowel inserters, tenoners, molders, and profilers, are all areas in which we 
+                  have experience in CNC equipment.
+                </p>
+                
+                <p >
+                  Our state-of-the-art manufacturing facility is equipped with advanced CNC 
+                  machinery and cutting-edge technology. We maintain strict quality control 
+                  standards throughout our production process to ensure that every component 
+                  meets the highest industry specifications and customer requirements.
+                </p>
+                
+                <p >
+                  With years of experience in precision engineering, we serve various industries 
+                  including automotive, aerospace, industrial machinery, and custom manufacturing. 
+                  Our skilled team of engineers and technicians work closely with clients to 
+                  deliver tailored solutions that exceed expectations.
+                </p>
 
-          {/* Text Content */}
-          <motion.div variants={containerVariants} className="space-y-4 sm:space-y-6 order-1 lg:order-2">
-            <motion.div variants={itemVariants}>
-              <h2 className="text-primary mb-2 text-sm tracking-widest">ABOUT COMPANY</h2>
-              <h3 className="text-foreground mb-4 sm:mb-6 font-playfair font-bold text-2xl sm:text-3xl md:text-4xl">Who We Are</h3>
+              </div>
+              
+              <div className="mt-6">
+                <a href="/about" className="inline-block px-6 py-3 bg-black text-white text-sm font-semibold hover:bg-gray-800 transition-colors">
+                  Learn More
+                </a>
+              </div>
             </motion.div>
 
-            <motion.p variants={itemVariants} className="text-gray-700 leading-relaxed text-lg">
-              We are Seven Eleven, a company that has come a long way since we began in 2012. Over the years, we have
-              grown into a global player with a strong presence in India and partnerships around the world.
-            </motion.p>
-
-            <motion.p variants={itemVariants} className="text-gray-700 leading-relaxed text-lg">
-              Known internationally, we are valued for our commitment to quality, affordability, and advanced extrusion
-              technology. With a wealth of experience and expertise, we continue to uphold a tradition of excellence.
-            </motion.p>
-
-            <motion.ul variants={containerVariants} className="space-y-3 pt-4">
-              {["Certified Company", "Global Reach", "Precision Engineering", "Expert Team"].map((item) => (
-                <motion.li key={item} variants={itemVariants} className="flex items-center gap-3 text-black">
-                  <span className="w-2 h-2 bg-primary rounded-full" />
-                  <span className="font-medium">{item}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
-
-            <motion.button
-              variants={itemVariants}
-              className="mt-8 px-8 py-3 bg-primary text-white font-semibold tracking-wider hover:bg-accent transition-colors duration-300 inline-flex items-center gap-2"
-              whileHover={{ x: 5 }}
-              whileTap={{ scale: 0.98 }}
-              suppressHydrationWarning={true}
-              
+            {/* Right Side - Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
             >
-              <a href="/about">              READ MORE
-</a>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </motion.button>
-          </motion.div>
-        </motion.div>
+              <div className="relative h-200 w-auto overflow-hidden">
+                <Image
+                  src="/about.jpg"
+                  alt="Industrial Machinery"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )
