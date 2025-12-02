@@ -23,7 +23,7 @@ export default function OurAbilities() {
             transition={{ duration: 0.8 }}
           >
             <Image
-              src="/other2.jpeg"
+              src="/ability.jpg"
               alt="CNC Machining Process"
               fill
               className="object-cover"
@@ -37,7 +37,7 @@ export default function OurAbilities() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="inline-block px-4 py-2 bg-orange-500 text-white text-sm font-semibold mb-6">
+            <div className="inline-block px-4 py-2 bg-white text-black text-sm font-semibold mb-6">
               Our Abilities
             </div>
             

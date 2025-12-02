@@ -123,10 +123,7 @@ export default function Collections() {
   return (
     <section id="products" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Decorative elements */}
-        <div className="absolute top-12 left-1/4 w-px h-32 bg-gradient-to-b from-black/20 to-transparent" />
-        <div className="absolute top-12 right-1/4 w-px h-32 bg-gradient-to-b from-black/20 to-transparent" />
-        
+       
         <motion.div
           className="text-center mb-8 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}

@@ -5,7 +5,7 @@ import Image from "next/image"
 
 export default function ProductsHero() {
   return (
-    <section className="relative min-h-[550px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[400px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -26,7 +26,7 @@ export default function ProductsHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 font-playfair">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white font-playfair">
             Our Products
           </h1>
         </motion.div>

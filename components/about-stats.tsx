@@ -119,11 +119,11 @@ export default function AboutStats() {
   }
 
   return (
-    <section className="relative py-20 bg-black text-white overflow-hidden">
+    <section className="relative py-10 bg-black text-white overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <div 
-          className="w-full h-full bg-cover bg-center opacity-30"
+          className="w-full h-full bg-cover bg-center opacity-110"
           style={{
             backgroundImage: "url('/industrial-welding-background.jpg')"
           }}

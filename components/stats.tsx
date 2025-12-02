@@ -137,8 +137,8 @@ export default function Stats() {
               <div className="inline-block  py-2  text-black-600 text-2xl  mt-12 mb-6">
                 <h2>Additional Service</h2>
               </div>
-              <h3 className="text-xl text-white mt-12 mb-6">WE ALSO OFFER</h3>
-              <p className="text-white leading-relaxed mb-8">
+              <h3 className="text-xl text-black md:text-white mt-12 mb-6">WE ALSO OFFER</h3>
+              <p className="text-black md:text-white leading-relaxed mb-8">
                 Beyond our core precision manufacturing services, we provide specialized 
                 capabilities that set us apart in the industry. Our advanced equipment 
                 and skilled technicians deliver exceptional results across diverse 
@@ -150,9 +150,9 @@ export default function Stats() {
                   <motion.li
                     key={index}
                     variants={itemVariants}
-                    className="flex items-center gap-3 text-white"
+                    className="flex items-center gap-3 text-white md:text-white"
                   >
-                    <span className="w-2 h-2 bg-white rounded-full" />
+                    <span className="w-2 h-2 bg-white md:bg-white rounded-full" />
                     <span>{service}</span>
                   </motion.li>
                 ))}

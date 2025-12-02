@@ -370,6 +370,7 @@ export default function ProductsGrid() {
                           ? 'bg-primary text-primary-foreground'
                           : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                       }`}
+                      suppressHydrationWarning
                     >
                       {category}
                     </button>
@@ -439,6 +440,7 @@ export default function ProductsGrid() {
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
                 className="px-4 py-2 border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-md"
+                suppressHydrationWarning
               >
                 Previous
               </button>
@@ -452,6 +454,7 @@ export default function ProductsGrid() {
                       ? 'bg-primary text-primary-foreground border-primary'
                       : 'border-border text-foreground hover:bg-primary hover:text-primary-foreground'
                   }`}
+                  suppressHydrationWarning
                 >
                   {page}
                 </button>
@@ -461,6 +464,7 @@ export default function ProductsGrid() {
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
                 className="px-4 py-2 border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-md"
+                suppressHydrationWarning
               >
                 Next
               </button>

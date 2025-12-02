@@ -53,7 +53,7 @@ export default function ContactSection() {
 
 
   return (
-    <section className="py-10 sm:py-16 md:py-20 bg-background">
+    <section className="py-10 sm:py-16 md:py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div

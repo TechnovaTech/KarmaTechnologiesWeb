@@ -40,9 +40,9 @@ export default function NewsletterTestimonials() {
       <section className="relative py-20 bg-black overflow-hidden">
         <div className="absolute inset-0">
           <div 
-            className="w-full h-full bg-cover bg-center opacity-60"
+            className="w-full h-full bg-cover bg-center opacity-110"
             style={{
-              backgroundImage: "url('/industrial-component-.jpg')"
+              backgroundImage: "url('/hero2.jpg')"
             }}
           />
           <div className="absolute inset-0 bg-black/70" />

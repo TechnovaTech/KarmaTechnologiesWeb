@@ -59,10 +59,7 @@ export default function WhyChooseUs() {
   return (
     <section className="py-24 bg-gray-50 relative">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Decorative elements */}
-        <div className="absolute top-12 left-1/4 w-px h-32 bg-gradient-to-b from-black/20 to-transparent" />
-        <div className="absolute top-12 right-1/4 w-px h-32 bg-gradient-to-b from-black/20 to-transparent" />
-
+       
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}

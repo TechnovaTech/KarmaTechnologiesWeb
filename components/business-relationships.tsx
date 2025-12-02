@@ -9,9 +9,10 @@ export default function BusinessRelationships() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <div 
-          className="w-full h-full bg-cover bg-center opacity-50"
+          className="w-full h-[120%] bg-cover bg-center opacity-1110 transform -translate-y-10"
           style={{
-            backgroundImage: "url('/industrial-component-detail.jpg')"
+            backgroundImage: "url('/hero3.jpg')",
+            backgroundAttachment: "fixed"
           }}
         />
         <div className="absolute inset-0 bg-black/70" />
@@ -43,10 +44,10 @@ export default function BusinessRelationships() {
             expertise, delivery, and support for these premium brands.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <Link 
               href="/about"
-              className="inline-flex items-center px-8 py-3 border-2 border-white text-white font-semibold hover:bg-white hover:text-black transition-colors duration-300"
+              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 border-2 border-white text-white font-semibold hover:bg-white hover:text-black transition-colors duration-300 text-center w-full sm:w-auto"
             >
               Read More
               <span className="ml-2">→</span>
@@ -54,7 +55,7 @@ export default function BusinessRelationships() {
             
             <Link 
               href="/quote"
-              className="inline-flex items-center px-8 py-3 border-2 border-white text-white font-semibold hover:bg-white hover:text-black transition-colors duration-300"
+              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 border-2 border-white text-white font-semibold hover:bg-white hover:text-black transition-colors duration-300 text-center w-full sm:w-auto"
             >
               Get a quote
               <span className="ml-2">→</span>

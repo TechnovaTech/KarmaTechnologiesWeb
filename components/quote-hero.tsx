@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function QuoteHero() {
   return (
-    <section className="relative min-h-[400px] sm:min-h-[500px] md:min-h-[550px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[400px] sm:min-h-[400px] md:min-h-[400px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <div 
