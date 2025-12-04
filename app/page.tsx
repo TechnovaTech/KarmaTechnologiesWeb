@@ -36,11 +36,8 @@ export default function Home() {
         <About />
         <Stats />
         <Collections />
-        <OurAbilities />
         <AdditionalServices />
-        <BusinessRelationships />
         <WhyChooseUs />
-        <NewsletterTestimonials />
         <Footer />
       </main>
     </QuoteProvider>

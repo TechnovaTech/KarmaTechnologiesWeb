@@ -17,12 +17,6 @@ const heroContent = [
     subtitle: "Innovative Solutions",
     description: "Advanced automation and cutting-edge technology for superior quality and efficiency in every project.",
     image: "/hero2.jpg"
-  },
-  {
-    title: "Sustainable Future",
-    subtitle: "Smart Technology",
-    description: "Leading the industry with eco-friendly processes and intelligent manufacturing systems.",
-    image: "/hero3.jpg"
   }
 ]
 
@@ -60,6 +54,10 @@ export default function Hero() {
 
 
   const currentContent = heroContent[currentIndex]
+
+  if (!currentContent) {
+    return null
+  }
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black">

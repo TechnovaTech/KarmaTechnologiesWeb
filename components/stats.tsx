@@ -13,7 +13,7 @@ const stats = [
 
 const services = [
   "Accuracy",
-  "Precision Engineering", 
+  "Precision Engineering",
   "Quality Control",
   "Custom Solutions"
 ]
@@ -35,17 +35,17 @@ function CountingNumber({ target, suffix = "", duration = 2000 }: CountingNumber
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime
       const progress = Math.min((currentTime - startTime) / duration, 1)
-      
+
       const easeOutQuart = 1 - Math.pow(1 - progress, 4)
       const currentCount = Math.floor(easeOutQuart * target)
-      
+
       setCount(currentCount)
-      
+
       if (progress < 1) {
         requestAnimationFrame(animate)
       }
     }
-    
+
     requestAnimationFrame(animate)
   }, [isVisible, target, duration])
 
@@ -95,34 +95,13 @@ export default function Stats() {
     <section className="relative">
       {/* White background for header, black for content */}
       <div className="absolute inset-0">
-        <div className="h-1/2 bg-white"></div>
-        <div className="h-1/2 bg-black"></div>
+        <div className="h-1/3 bg-white"></div>
+        <div className="h-1/1 bg-black"></div>
       </div>
-      
-      <div className="relative z-10 py-24">
+
+      <div className="relative z-10 pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Stats Grid */}
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-0 mb-16"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className={`${stat.bg} p-8 text-center`}
-              >
-                <CountingNumber 
-                  target={stat.target} 
-                  suffix={stat.target >= 1000 ? "" : "+"}
-                />
-                <p className="text-sm tracking-wider">{stat.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+
 
           {/* Services Section */}
           <motion.div
@@ -131,38 +110,31 @@ export default function Stats() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-          > 
+          >
             {/* Left Content */}
             <motion.div variants={itemVariants}>
-              <div className="inline-block  py-2  text-black-600 text-2xl  mt-12 mb-6">
-                <h2>Additional Service</h2>
+              <div className="text-black text-xl sm:text-2xl md:text-3xl font-bold mb-20">
+                <h2>Custom Projects</h2>
               </div>
-              <h3 className="text-xl text-black md:text-white mt-12 mb-6">WE ALSO OFFER</h3>
-              <p className="text-black md:text-white leading-relaxed mb-8">
-                Beyond our core precision manufacturing services, we provide specialized 
-                capabilities that set us apart in the industry. Our advanced equipment 
-                and skilled technicians deliver exceptional results across diverse 
-                manufacturing challenges.
-              </p>
 
-              <ul className="space-y-4">
-                {services.map((service, index) => (
-                  <motion.li
-                    key={index}
-                    variants={itemVariants}
-                    className="flex items-center gap-3 text-white md:text-white"
-                  >
-                    <span className="w-2 h-2 bg-white md:bg-white rounded-full" />
-                    <span>{service}</span>
-                  </motion.li>
-                ))}
-              </ul>
+              <p className=" text-black sm:text-lg md:text-xl md:text-white leading-relaxed pt-3">
+                We help clients bring their ideas to life by designing and building custom solutions such as small machinery, production jigs, and specialized fixtures.
+                Our team also offers SolidWorks design services, including 3D &nbsp;
+                <span className="text-white">
+ modeling and 2D 
+                drawing creation tailored to your requirements.
+                Whether you need a unique tool, a custom mechanism, or a complete design-to-build service, we deliver practical and precise solutions.”
+
+                </span>
+                              </p>
+
+
             </motion.div>
 
             {/* Right Image */}
             <motion.div variants={itemVariants} className="relative h-[500px] overflow-hidden">
               <Image
-                src="/other.jpg"
+                src="/image.jpg"
                 alt="Advanced Manufacturing Equipment"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
@@ -171,7 +143,7 @@ export default function Stats() {
           </motion.div>
         </div>
 
-        </div>
-      </section>
+      </div>
+    </section>
   )
 }

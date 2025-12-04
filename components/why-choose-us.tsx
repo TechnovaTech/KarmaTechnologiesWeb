@@ -67,9 +67,7 @@ export default function WhyChooseUs() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-block px-6 py-2 border border-black/30 rounded-full mb-6">
-            <h2 className="text-black text-sm tracking-[0.3em] font-light">WHY CHOOSE US</h2>
-          </div>
+         
           <h3 className="text-5xl md:text-6xl font-bold text-black mb-4 font-playfair">
             Six Reasons For People For Choosing Us
             <span className="block text-gray-600"></span>

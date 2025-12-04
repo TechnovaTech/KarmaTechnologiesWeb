@@ -24,7 +24,7 @@ const services = [
 
 export default function About() {
   return (
-    <section id="about" className="relative -mt-32 z-20">
+    <section id="about" className="relative -mt-12 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="bg-white shadow-xl p-8 md:p-12">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -35,52 +35,30 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-block px-4 py-2 bg-black text-white text-sm font-semibold mb-6">
-                About Us
-              </div>
-
+              
               <h2 className="text-3xl font-bold text-black mb-6 leading-tight">
-                Introduction
+                Who We Are
               </h2>
 
               <div className="space-y-4 text-black leading-relaxed">
                 <p >
-                  Karma Technologies is one of the leading manufacturers of precision machined
-                  components based in Canada. The company was founded
-                  with the vision and commitment to provide excellent quality products and
-                  services to customers. We are precision engineering company with range
-                  of finest cnc machines in India.
+                  At KARMA MechTech, we specialize in precision CNC machining with a strong focus on quality, accuracy, and reliability.
+                  Based in Saint-Laurent, Montréal, our facility is equipped to produce high-tolerance aluminum, steel, and custom metal components.
                 </p>
 
                 <p>
-                  We are delighted to offer authentic CNC parts, industrial components, and
-                  much more in addition to our practical experience in machine repair. The
-                  whole range of the cut, band, and bore operations, as well as many more
-                  specialized machine types including wide belt sanders, boring machines,
-                  dowel inserters, tenoners, molders, and profilers, are all areas in which we
-                  have experience in CNC equipment.
+                  We support low-volume, complex, and prototype machining with 4-axis and 5-axis capabilities.
+                  Our team combines advanced technology with skilled craftsmanship to deliver consistent results.
                 </p>
 
                 <p >
-                  Our state-of-the-art manufacturing facility is equipped with advanced CNC
-                  machinery and cutting-edge technology. We maintain strict quality control
-                  standards throughout our production process to ensure that every component
-                  meets the highest industry specifications and customer requirements.
+                  Every part we produce undergoes thorough inspection to ensure it meets strict industrial standards.
+                  We are committed to quick turnaround times, transparent communication, and long-term customer partnerships.
+                  At KARMA MechTech, precision isn’t just a service—it’s our identity.”
                 </p>
 
-                <p >
-                  With years of experience in precision engineering, we serve various industries
-                  including automotive, aerospace, industrial machinery, and custom manufacturing.
-                  Our skilled team of engineers and technicians work closely with clients to
-                  deliver tailored solutions that exceed expectations.
-                </p>
+            
 
-              </div>
-
-              <div className="mt-6">
-                <a href="/about" className="inline-block px-6 py-3 bg-black text-white text-sm font-semibold hover:bg-gray-800 transition-colors">
-                  Learn More
-                </a>
               </div>
             </motion.div>
 
@@ -92,7 +70,7 @@ export default function About() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative h-200 w-auto overflow-hidden">
+              <div className="relative h-120 w-auto overflow-hidden">
                 <Image
                   src="/about.jpg"
                   alt="Industrial Machinery"
@@ -102,32 +80,6 @@ export default function About() {
               </div>
             </motion.div>
           </div>
-
-          {/* Services Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {services.map((service, index) => (
-              <div key={index} className="text-center p-4">
-                <div className="w-16 h-16 mx-auto mb-4">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    width={64}
-                    height={64}
-                    className="object-contain"
-                  />
-                </div>
-                <p className="text-sm text-black leading-relaxed">
-                  {service.title}
-                </p>
-              </div>
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>
