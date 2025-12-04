@@ -65,12 +65,11 @@ export default function Footer() {
             <p className="text-white text-sm leading-relaxed mb-4 flex-grow font-medium">
               Precision. Performance. Perfection.
             </p>
-            <p className="text-white text-sm mb-1">
-              © Copyright Karma Technologies Mecniques. All Rights Reserved
-            </p>
-            <p className="text-white text-sm">
-              Designed & Developed by <br/> <a href="https://www.technovatechnologies.com/" className="text-white  hover:underline" target="_blank" rel="noopener noreferrer">Technova Technologies</a>
-            </p>
+            <div className="text-white text-sm space-y-1 hidden md:block min-w-xl max-w-2xl">
+              <p>© Copyright Karma Technologies Mecniques. All Rights Reserved</p>
+              <p>Designed & Developed by <a href="https://www.technovatechnologies.com/" className="text-red-400 hover:underline" target="_blank" rel="noopener noreferrer">Technova Technologies</a></p>
+            </div>
+
           </motion.div>
 
           {/* Useful Links */}
@@ -160,6 +159,14 @@ export default function Footer() {
             </div>
           </motion.div>
         </motion.div>
+        
+        {/* Copyright Section - Mobile Only */}
+        <div className="border-t border-gray-700 pt-4 text-center md:hidden">
+          <div className="text-white text-sm space-y-1">
+            <p>© Copyright Karma Technologies Mecniques. All Rights Reserved</p>
+            <p>Designed & Developed by <a href="https://www.technovatechnologies.com/" className="text-red-400 hover:underline" target="_blank" rel="noopener noreferrer">Technova Technologies</a></p>
+          </div>
+        </div>
       </div>
     </footer>
   )

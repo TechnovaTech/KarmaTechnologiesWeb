@@ -108,16 +108,16 @@ export default function Hero() {
                   {/* <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white">
                     {currentContent.title}
                   </h1> */}
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4 whitespace-nowrap">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight mb-4">
                     {currentContent.title}
                   </h1>
 
                   {currentContent.subtitle && (
-                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight mb-6 whitespace-nowrap">
+                    <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white leading-tight mb-6">
                       {currentContent.subtitle}
                     </h2>
                   )}
-                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white leading-relaxed mb-8 max-w-2xl">
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white leading-relaxed mb-8 max-w-2xl">
                     {currentContent.description}
                   </p>
                   <Link href="/contact" className="w-38 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors duration-300 inline-block text-center">

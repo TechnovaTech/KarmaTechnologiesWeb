@@ -113,19 +113,19 @@ export default function Stats() {
           >
             {/* Left Content */}
             <motion.div variants={itemVariants}>
-              <div className="text-black text-xl sm:text-2xl md:text-3xl font-bold mb-20">
+              <div className="text-black md:text-black text-xl sm:text-2xl md:text-3xl font-bold mb-16">
                 <h2>Custom Projects</h2>
               </div>
 
-              <p className=" text-black sm:text-lg md:text-xl md:text-white leading-relaxed pt-3">
+              <p className="bg-black text-white md:bg-transparent md:text-white text-base sm:text-lg md:text-xl leading-relaxed p-4 md:p-0 -mx-6 md:mx-0 md:rounded-none">
                 We help clients bring their ideas to life by designing and building custom solutions such as small machinery, production jigs, and specialized fixtures.
                 Our team also offers SolidWorks design services, including 3D &nbsp;
-                <span className="text-white">
+
  modeling and 2D 
                 drawing creation tailored to your requirements.
                 Whether you need a unique tool, a custom mechanism, or a complete design-to-build service, we deliver practical and precise solutions.”
 
-                </span>
+
                               </p>
 
 
