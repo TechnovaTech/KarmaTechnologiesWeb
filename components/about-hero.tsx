@@ -26,7 +26,7 @@ export default function AboutHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 font-playfair">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl pt-20 font-bold text-white mb-8 font-playfair">
             About Us
           </h1>
         </motion.div>

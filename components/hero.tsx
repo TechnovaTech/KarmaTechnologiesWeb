@@ -53,6 +53,15 @@ export default function Hero() {
 
 
 
+  const handleDownload = () => {
+    const link = document.createElement('a')
+    link.href = '/brochure.pdf'
+    link.download = 'Karma MechTech.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   const currentContent = heroContent[currentIndex]
 
   if (!currentContent) {
@@ -121,9 +130,9 @@ export default function Hero() {
                     {currentContent.description}
                   </p>
                   <Link href="/contact" className="w-38 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors duration-300 inline-block text-center">
-                    Contacts
+                    Contact Us
                   </Link>
-                  <button className="w-38 px-6 py-3 bg-orange-500 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors duration-300" suppressHydrationWarning>
+                  <button onClick={handleDownload} className="w-38 px-6 py-3 bg-orange-500 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors duration-300" suppressHydrationWarning>
                     Brochure
                   </button>
                 </div>

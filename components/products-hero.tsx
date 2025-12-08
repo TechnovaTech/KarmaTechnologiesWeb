@@ -26,7 +26,7 @@ export default function ProductsHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white font-playfair">
+          <h1 className="text-6xl md:text-7xl pt-6 lg:text-8xl font-bold text-white font-playfair">
             Our work
           </h1>
         </motion.div>
