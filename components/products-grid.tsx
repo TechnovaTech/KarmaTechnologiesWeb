@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { useState } from "react"
-import { Search } from "lucide-react"
+
 
 type Product = {
   id: number
@@ -14,13 +14,9 @@ type Product = {
 }
 
 export default function ProductsGrid() {
-  const [currentPage, setCurrentPage] = useState(1)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("All")
   const [showSuccess, setShowSuccess] = useState(false)
   const [successMessage, setSuccessMessage] = useState("")
-  const productsPerPage = 12
 
   // 31 Detailed Products
   const allProducts: Product[] = [
@@ -243,26 +239,7 @@ export default function ProductsGrid() {
     }
   ]
 
-  // Get unique categories
-  const categories = ["All", ...Array.from(new Set(allProducts.map(product => product.category)))]
 
-  // Filter products based on search term and category
-  const filteredProducts = allProducts.filter(product => {
-    const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.category.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === "All" || product.category === selectedCategory
-    return matchesSearch && matchesCategory
-  })
-
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
-  const startIndex = (currentPage - 1) * productsPerPage
-  const currentProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage)
-
-  // Reset to page 1 when search changes
-  const handleSearchChange = (value: string) => {
-    setSearchTerm(value)
-    setCurrentPage(1)
-  }
 
   // Add product to quote
   const addToQuote = (product: Product) => {
@@ -310,94 +287,14 @@ export default function ProductsGrid() {
   return (
     <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-6">
-
-        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
-          <div className="inline-block px-6 py-2 border border-primary/30 rounded-full mb-6">
-            <h2 className="text-primary text-sm tracking-[0.3em] font-light">FEATURED PRODUCTS</h2>
-          </div>
-          <h3 className="text-5xl md:text-6xl font-bold text-foreground mb-4 font-playfair">
-            Our Premium Products
-            <span className="block text-muted-foreground"></span>
-          </h3>
-          <div className="w-24 h-px bg-primary mx-auto" />
-        </motion.div>
-
-        {/* Main Content with Sidebar */}
-        <div className="grid lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-1"
-          >
-            <div className="bg-card p-6 border border-border rounded-lg sticky top-24">
-              {/* Search */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-foreground mb-4">Search Products</h3>
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={(e) => handleSearchChange(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
-                    suppressHydrationWarning
-                  />
-                </div>
-              </div>
-
-              {/* Categories Filter */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-foreground mb-4">Categories</h3>
-                <div className="space-y-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => {
-                        setSelectedCategory(category)
-                        setCurrentPage(1)
-                      }}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
-                        selectedCategory === category
-                          ? 'bg-primary text-primary-foreground'
-                          : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                      }`}
-                      suppressHydrationWarning
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Product Count */}
-              <div className="border-t border-border pt-4">
-                <div className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">{filteredProducts.length}</span> products found
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Products Grid */}
-          <div className="lg:col-span-3">
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              key={`${currentPage}-${searchTerm}-${selectedCategory}`}
-            >
-              {currentProducts.map((product) => (
+          {allProducts.map((product) => (
                 <motion.div
                   key={product.id}
                   variants={itemVariants}
@@ -421,57 +318,8 @@ export default function ProductsGrid() {
                     <p className="text-muted-foreground text-xs">{product.category}</p>
                   </div>
                 </motion.div>
-              ))}
-            </motion.div>
-
-            {/* Results Info */}
-            <div className="text-center mt-8 mb-4">
-              <p className="text-muted-foreground">
-                Showing {currentProducts.length} of {filteredProducts.length} products
-                {searchTerm && ` for "${searchTerm}"`}
-                {selectedCategory !== "All" && ` in ${selectedCategory}`}
-              </p>
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-2 mt-8">
-              <button
-                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                className="px-4 py-2 border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-md"
-                suppressHydrationWarning
-              >
-                Previous
-              </button>
-              
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`w-10 h-10 border transition-colors rounded-md ${
-                    currentPage === page
-                      ? 'bg-primary text-primary-foreground border-primary'
-                      : 'border-border text-foreground hover:bg-primary hover:text-primary-foreground'
-                  }`}
-                  suppressHydrationWarning
-                >
-                  {page}
-                </button>
-              ))}
-              
-              <button
-                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-                className="px-4 py-2 border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-md"
-                suppressHydrationWarning
-              >
-                Next
-              </button>
-            </div>
-            )}
-          </div>
-        </div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Product Detail Modal */}

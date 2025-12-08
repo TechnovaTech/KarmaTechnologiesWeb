@@ -151,8 +151,7 @@ export default function ContactSection() {
                   <div>
                     <h5 className="font-semibold text-foreground mb-1">Business Hours</h5>
                     <p className="text-muted-foreground text-sm">
-                      Weekdays - 9AM to 5PM<br />
-                      Weekends - Off
+                      Monday - Sunday: 8:00 AM - 8:00 PM
                     </p>
                   </div>
                 </div>

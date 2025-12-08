@@ -26,9 +26,7 @@ export default function AboutPage() {
       <Navbar isScrolled={isScrolled} />
       <AboutHero />
       <AboutContent />
-      <AboutStats />
-      <TechnologySection />
-      <ExcellenceSection />
+
       <Footer />
     </main>
   )

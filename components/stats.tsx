@@ -113,7 +113,7 @@ export default function Stats() {
           >
             {/* Left Content */}
             <motion.div variants={itemVariants}>
-              <div className="text-black md:text-black text-xl sm:text-2xl md:text-3xl font-bold mb-16">
+              <div className="text-black md:text-black text-xl sm:text-2xl md:text-3xl font-bold mb-18">
                 <h2>Custom Projects</h2>
               </div>
 

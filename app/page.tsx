@@ -34,9 +34,9 @@ export default function Home() {
         <Navbar isScrolled={isScrolled} />
         <Hero />
         <About />
+        <AdditionalServices />
         <Stats />
         <Collections />
-        <AdditionalServices />
         <WhyChooseUs />
         <Footer />
       </main>

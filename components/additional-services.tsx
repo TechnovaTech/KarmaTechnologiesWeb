@@ -5,6 +5,11 @@ import Image from "next/image"
 
 const services = [
   {
+    image: "/s11.png",
+    title: "CNC / VMC Machining",
+    description: "High-accuracy turning and milling for complex metal and aluminum components. "
+  },
+  {
     image: "/s1.png",
     title: "Custom Manufacturing",
     description: "Tailored precision manufacturing solutions for your specific requirements and applications."
@@ -52,7 +57,7 @@ export default function AdditionalServices() {
         
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

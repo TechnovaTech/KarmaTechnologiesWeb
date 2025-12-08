@@ -42,7 +42,7 @@ export default function About() {
 
               <div className="space-y-4 text-black leading-relaxed">
                 <p >
-                  At KARMA MechTech, we specialize in precision CNC machining with a strong focus on quality, accuracy, and reliability.
+                  At Karma Mechtech, we specialize in precision CNC machining with a strong focus on quality, accuracy, and reliability.
                   Based in Saint-Laurent, Montréal, our facility is equipped to produce high-tolerance aluminum, steel, and custom metal components.
                 </p>
 
@@ -54,7 +54,7 @@ export default function About() {
                 <p >
                   Every part we produce undergoes thorough inspection to ensure it meets strict industrial standards.
                   We are committed to quick turnaround times, transparent communication, and long-term customer partnerships.
-                  At KARMA MechTech, precision isn’t just a service—it’s our identity.”
+                  At Karma Mechtech, precision isn’t just a service—it’s our identity.
                 </p>
 
             
