@@ -8,8 +8,8 @@ export async function POST(request: NextRequest) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD
+        user: 'info.karmamechtech@gmail.com',
+        pass: 'xmst bpco vljh wqdb'
       }
     })
 
@@ -23,18 +23,18 @@ export async function POST(request: NextRequest) {
     `).join('')
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: 'krimavadodariya07@gmail.com',
-      subject: `Quote Request: ${formData.name}`,
+      from: 'info.karmamechtech@gmail.com',
+      to: 'info.karmamechtech@gmail.com',
+      subject: `Quote Request from ${formData.name} - Karma Mech Tech`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px;">
-          <h2 style="color: #D7263D;">New Quote Request</h2>
+          <h2 style="color: #000000;">New Quote Request - Karma Mech Tech</h2>
           <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="margin-top: 0;">Customer Details:</h3>
-            <p><strong>Name:</strong> ${formData.name}</p>
-            <p><strong>Email:</strong> ${formData.email}</p>
-            <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
-            <p><strong>Company:</strong> ${formData.company || 'Not provided'}</p>
+            <p><strong>Full Name:</strong> ${formData.name}</p>
+            <p><strong>Email Address:</strong> ${formData.email}</p>
+            <p><strong>Phone Number:</strong> ${formData.phone || 'Not provided'}</p>
+            <p><strong>Company Name:</strong> ${formData.company || 'Not provided'}</p>
             ${formData.message ? `
               <p><strong>Additional Requirements:</strong></p>
               <div style="background: white; padding: 15px; border-radius: 5px; margin-top: 10px;">
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     }
 
     await transporter.sendMail(mailOptions)
-    console.log('✅ Quote request sent to krimavadodariya07@gmail.com!')
+    console.log('✅ Quote request sent to info.karmamechtech@gmail.com!')
     
     return Response.json({ success: true })
   } catch (error) {
