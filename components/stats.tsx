@@ -3,12 +3,21 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 const stats = [
   { number: "15+", target: 15, label: "Years In Business", bg: "bg-black text-white" },
   { number: "1.5k", target: 1500, label: "Happy Clients", bg: "bg-gray-100 text-black" },
   { number: "50+", target: 50, label: "Products", bg: "bg-black text-white" },
   { number: "80+", target: 80, label: "Trained Staff", bg: "bg-gray-100 text-black" }
+]
+
+const slideImages = [
+  "/slide1.jpg",
+  "/slide2.jpg",
+  "/slide3.jpg",
+  "/slide4.png",
+  "/slide5.png"
 ]
 
 const services = [
@@ -72,6 +81,16 @@ function CountingNumber({ target, suffix = "", duration = 2000 }: CountingNumber
 }
 
 export default function Stats() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const { t } = useLanguage()
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % slideImages.length)
+    }, 6000)
+    return () => clearInterval(interval)
+  }, [])
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -114,31 +133,33 @@ export default function Stats() {
             {/* Left Content */}
             <motion.div variants={itemVariants}>
               <div className="text-black md:text-black text-xl sm:text-2xl md:text-3xl font-bold mb-18">
-                <h2>Custom Projects</h2>
+                <h2>{t('stats.title')}</h2>
               </div>
 
               <p className="bg-black text-white md:bg-transparent md:text-white text-base sm:text-lg md:text-xl leading-relaxed p-4 md:p-0 -mx-6 md:mx-0 md:rounded-none">
-                We help clients bring their ideas to life by designing and building custom solutions such as small machinery, production jigs, and specialized fixtures.
-                Our team also offers SolidWorks design services, including 3D &nbsp;
-
- modeling and 2D 
-                drawing creation tailored to your requirements.
-                Whether you need a unique tool, a custom mechanism, or a complete design-to-build service, we deliver practical and precise solutions.”
-
-
-                              </p>
+                {t('stats.desc')}
+              </p>
 
 
             </motion.div>
 
-            {/* Right Image */}
-            <motion.div variants={itemVariants} className="relative h-[500px] overflow-hidden">
-              <Image
-                src="/image.jpg"
-                alt="Advanced Manufacturing Equipment"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
+            {/* Right Image Slideshow */}
+            <motion.div variants={itemVariants} className="relative h-[500px] overflow-hidden rounded-lg">
+              <motion.div
+                key={currentImageIndex}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={slideImages[currentImageIndex]}
+                  alt="Manufacturing Equipment"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { useLanguage } from "@/contexts/language-context"
 
 const services = [
   {
@@ -23,6 +24,8 @@ const services = [
 ]
 
 export default function About() {
+  const { t } = useLanguage()
+  
   return (
     <section id="about" className="relative -mt-12 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -37,22 +40,20 @@ export default function About() {
             >
               
               <h2 className="text-3xl font-bold text-black mb-6 leading-tight">
-                Who We Are
+                {t('about.title')}
               </h2>
 
               <div className="space-y-4 text-black leading-relaxed">
                 <p >
-                  At Karma Mechtech, we specialize in precision CNC machining with a strong focus on quality, accuracy, and reliability.
-                  Based in Saint-Laurent, Montréal, our facility is equipped to produce high-tolerance aluminum, steel, and custom metal components.
+                  {t('about.p1')}
                 </p>
 
                 <p>
-                  We support low-volume, complex, and prototype machining with 4-axis and 5-axis capabilities.
-                  Our team combines advanced technology with skilled craftsmanship to deliver consistent results.
+                  {t('about.p2')}
                 </p>
 
                 <p >
-                  Every part we produce undergoes thorough inspection to ensure it meets strict industrial standards.
+                  {t('about.p3')}
                   We are committed to quick turnaround times, transparent communication, and long-term customer partnerships.
                   At Karma Mechtech, precision isn’t just a service—it’s our identity.
                 </p>

@@ -1,8 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function QuoteHero() {
+  const { t } = useLanguage()
+  
   return (
     <section className="relative min-h-[400px] sm:min-h-[400px] md:min-h-[400px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -23,18 +26,12 @@ export default function QuoteHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          
-          
           <h1 className="text-3xl sm:text-4xl pt-20 md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 font-playfair">
-            Request Quotes
+            {t('quote.hero.title')}
           </h1>
-          
-          
           <div className="w-24 h-px bg-primary mx-auto" />
         </motion.div>
       </div>
-
-      
     </section>
   )
 }

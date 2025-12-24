@@ -2,41 +2,43 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-
-const reasons = [
-  {
-    image: "/s5.png",
-    title: "Quality Material",
-    description: "Premium grade materials ensuring durability and performance"
-  },
-  {
-    image: "/s6.png",
-    title: "Accredited",
-    description: "Certified quality management systems and industry standards"
-  },
-  {
-    image: "/s7.png",
-    title: "Trained Workers",
-    description: "Skilled professionals with extensive manufacturing expertise"
-  },
-  {
-    image: "/s8.png",
-    title: "Global Reach",
-    description: "International presence with worldwide shipping capabilities"
-  },
-  {
-    image: "/s9.png",
-    title: "Quick Response",
-    description: "Fast turnaround times and responsive customer service"
-  },
-  {
-    image: "/s10.png",
-    title: "Sustainability Focus",
-    description: "Environmentally conscious manufacturing and recycling practices"
-  }
-]
+import { useLanguage } from "@/contexts/language-context"
 
 export default function WhyChooseUs() {
+  const { t } = useLanguage()
+  
+  const reasons = [
+    {
+      image: "/s5.png",
+      title: t('why.quality'),
+      description: t('why.quality.desc')
+    },
+    {
+      image: "/s6.png",
+      title: t('why.accredited'),
+      description: t('why.accredited.desc')
+    },
+    {
+      image: "/s7.png",
+      title: t('why.workers'),
+      description: t('why.workers.desc')
+    },
+    {
+      image: "/s8.png",
+      title: t('why.global'),
+      description: t('why.global.desc')
+    },
+    {
+      image: "/s9.png",
+      title: t('why.response'),
+      description: t('why.response.desc')
+    },
+    {
+      image: "/s10.png",
+      title: t('why.sustainability'),
+      description: t('why.sustainability.desc')
+    }
+  ]
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -69,14 +71,14 @@ export default function WhyChooseUs() {
         >
          
           <h3 className="text-5xl md:text-6xl font-bold text-black mb-4 font-playfair">
-            Six Reasons For People For Choosing Us
+            {t('why.title')}
             <span className="block text-gray-600"></span>
           </h3>
           <div className="w-24 h-px bg-black mx-auto" />
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          className="grid grid-cols-6 gap-4 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -86,22 +88,22 @@ export default function WhyChooseUs() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="group text-center p-8 bg-white border border-black/10 hover:border-black transition-all duration-300 rounded-sm hover:shadow-lg"
+              className="group text-center p-4 bg-white border border-black/10 hover:border-black transition-all duration-300 rounded-sm hover:shadow-lg"
               whileHover={{ y: -5 }}
             >
-              <div className="w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mx-auto mb-4 sm:mb-6 overflow-hidden">
+              <div className="w-16 h-16 flex items-center justify-center mx-auto mb-3 overflow-hidden">
                 <Image
                   src={reason.image}
                   alt={reason.title}
-                  width={150}
-                  height={150}
+                  width={64}
+                  height={64}
                   className="object-contain"
                 />
               </div>
-              <h4 className="text-xl font-bold text-black mb-4 font-playfair">
+              <h4 className="text-sm font-bold text-black mb-2 font-playfair">
                 {reason.title}
               </h4>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-xs text-gray-600 leading-relaxed">
                 {reason.description}
               </p>
               <div className="w-12 h-px bg-black/30 mx-auto mt-6" />

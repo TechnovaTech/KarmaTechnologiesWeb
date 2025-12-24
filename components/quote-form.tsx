@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Trash2, Plus, Minus } from "lucide-react"
 import { useQuote } from "@/contexts/quote-context"
+import { useLanguage } from "@/contexts/language-context"
 
 type QuoteItem = {
   id: number
@@ -16,6 +17,7 @@ type QuoteItem = {
 
 export default function QuoteForm() {
   const { quoteItems } = useQuote()
+  const { t } = useLanguage()
   const [showSuccess, setShowSuccess] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
@@ -85,7 +87,7 @@ export default function QuoteForm() {
         >
           
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 font-playfair">
-            Get Your Custom Quote
+            {t('quote.form.title')}
           </h1>
           <div className="w-44 h-px bg-primary mx-auto" />
         </motion.div>
@@ -97,13 +99,13 @@ export default function QuoteForm() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 sm:mb-6">Selected Products</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 sm:mb-6">{t('quote.form.selected')}</h3>
             
             {quoteItems.length === 0 ? (
               <div className="text-center py-12 border-2 border-dashed border-border rounded-lg">
-                <p className="text-muted-foreground">No products selected</p>
+                <p className="text-muted-foreground">{t('quote.form.noProducts')}</p>
                 <p className="text-sm text-muted-foreground mt-2">
-                  Go to products page to add items to your quote
+                  {t('quote.form.goToProducts')}
                 </p>
               </div>
             ) : (
@@ -158,13 +160,13 @@ export default function QuoteForm() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 sm:mb-6">Contact Information</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 sm:mb-6">{t('quote.form.contact')}</h3>
             
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
-                    Full Name *
+                    {t('quote.form.fullName')} *
                   </label>
                   <input
                     type="text"
@@ -178,7 +180,7 @@ export default function QuoteForm() {
                 
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
-                    Email Address *
+                    {t('quote.form.emailAddress')} *
                   </label>
                   <input
                     type="email"
@@ -194,7 +196,7 @@ export default function QuoteForm() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
-                    Phone Number
+                    {t('quote.form.phoneNumber')}
                   </label>
                   <input
                     type="tel"
@@ -207,7 +209,7 @@ export default function QuoteForm() {
                 
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
-                    Company Name
+                    {t('quote.form.companyName')}
                   </label>
                   <input
                     type="text"
@@ -221,13 +223,13 @@ export default function QuoteForm() {
               
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">
-                  Additional Requirements
+                  {t('quote.form.requirements')}
                 </label>
                 <textarea
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                  placeholder="Please describe your specific requirements, quantities, delivery timeline, etc."
+                  placeholder={t('quote.form.placeholder')}
                   className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
                   suppressHydrationWarning
                 />
@@ -238,7 +240,7 @@ export default function QuoteForm() {
                 disabled={quoteItems.length === 0 || isSubmitting}
                 className="w-full px-6 py-4 bg-primary text-primary-foreground font-semibold tracking-wider hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-lg"
               >
-                {isSubmitting ? 'Sending...' : 'Submit Quote Request'}
+                {isSubmitting ? t('quote.form.sending') : t('quote.form.submit')}
               </button>
             </form>
           </motion.div>
@@ -255,7 +257,7 @@ export default function QuoteForm() {
         >
           <div className="flex items-center gap-2">
             <span className="text-lg">✓</span>
-            <span className="font-semibold">Quote request sent successfully!</span>
+            <span className="font-semibold">{t('quote.form.success')}</span>
           </div>
         </motion.div>
       )}

@@ -2,36 +2,38 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-
-const services = [
-  {
-    image: "/s11.png",
-    title: "CNC / VMC Machining",
-    description: "High-accuracy turning and milling for complex metal and aluminum components. "
-  },
-  {
-    image: "/s1.png",
-    title: "Custom Manufacturing",
-    description: "Tailored precision manufacturing solutions for your specific requirements and applications."
-  },
-  {
-    image: "/s2.png",
-    title: "Engineering Support",
-    description: "Expert engineering consultation and technical support throughout your project lifecycle."
-  },
-  {
-    image: "/s3.png",
-    title: "Quality Assurance",
-    description: "Comprehensive quality control and testing to ensure products meet industry standards."
-  },
-  {
-    image: "/s4.png",
-    title: "Global Delivery",
-    description: "Reliable worldwide shipping and logistics support for timely project completion."
-  }
-]
+import { useLanguage } from "@/contexts/language-context"
 
 export default function AdditionalServices() {
+  const { t } = useLanguage()
+  
+  const services = [
+    {
+      image: "/s11.png",
+      title: t('services.cnc.title'),
+      description: t('services.cnc.desc')
+    },
+    {
+      image: "/s1.png",
+      title: t('services.custom.title'),
+      description: t('services.custom.desc')
+    },
+    {
+      image: "/s2.png",
+      title: t('services.engineering.title'),
+      description: t('services.engineering.desc')
+    },
+    {
+      image: "/s3.png",
+      title: t('services.quality.title'),
+      description: t('services.quality.desc')
+    },
+    {
+      image: "/s4.png",
+      title: t('services.delivery.title'),
+      description: t('services.delivery.desc')
+    }
+  ]
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

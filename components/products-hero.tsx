@@ -2,14 +2,17 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function ProductsHero() {
+  const { t } = useLanguage()
+  
   return (
     <section className="relative min-h-[400px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/precision-manufacturing-process.jpg"
+          src="/ProductHero.png"
           alt="Manufacturing products"
           fill
           className="object-cover"
@@ -27,7 +30,7 @@ export default function ProductsHero() {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <h1 className="text-6xl md:text-7xl pt-6 lg:text-8xl font-bold text-white font-playfair">
-            Our work
+            {t('products.hero.title')}
           </h1>
         </motion.div>
       </div>

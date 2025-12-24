@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from 'react'
+import { useLanguage } from '@/contexts/language-context'
 
 export default function ContactForm() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -41,7 +43,7 @@ export default function ContactForm() {
       <div>
         <input
           type="text"
-          placeholder="Name"
+          placeholder={t('contact.form.name')}
           value={formData.name}
           onChange={(e) => setFormData({...formData, name: e.target.value})}
           required
@@ -51,7 +53,7 @@ export default function ContactForm() {
       <div>
         <input
           type="email"
-          placeholder="Email"
+          placeholder={t('contact.form.email')}
           value={formData.email}
           onChange={(e) => setFormData({...formData, email: e.target.value})}
           required
@@ -61,7 +63,7 @@ export default function ContactForm() {
       <div>
         <input
           type="text"
-          placeholder="Subject"
+          placeholder={t('contact.form.subject')}
           value={formData.subject}
           onChange={(e) => setFormData({...formData, subject: e.target.value})}
           required
@@ -70,7 +72,7 @@ export default function ContactForm() {
       </div>
       <div>
         <textarea
-          placeholder="Message"
+          placeholder={t('contact.form.message')}
           value={formData.message}
           onChange={(e) => setFormData({...formData, message: e.target.value})}
           required
@@ -83,13 +85,13 @@ export default function ContactForm() {
         disabled={isSubmitting}
         className="w-full bg-black text-white p-3 rounded-lg hover:bg-gray-800 disabled:opacity-50"
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
       </button>
       {submitStatus === 'success' && (
-        <p className="text-green-600 text-center">Message sent successfully!</p>
+        <p className="text-green-600 text-center">{t('contact.form.success')}</p>
       )}
       {submitStatus === 'error' && (
-        <p className="text-red-600 text-center">Failed to send message. Please try again.</p>
+        <p className="text-red-600 text-center">{t('contact.form.error')}</p>
       )}
     </form>
   )

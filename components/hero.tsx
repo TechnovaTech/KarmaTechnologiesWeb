@@ -4,24 +4,26 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
-
-const heroContent = [
-  {
-    title: "Engineering Excellence",
-    subtitle: "Driving Progress",
-    description: "Explore our expertise in extrusion systems, sustainable materials, and global manufacturing innovation.",
-    image: "/hero1.jpg"
-  },
-  {
-    title: "Precision Manufacturing",
-    subtitle: "Innovative Solutions",
-    description: "Advanced automation and cutting-edge technology for superior quality and efficiency in every project.",
-    image: "/hero2.jpg"
-  }
-]
+import { useLanguage } from "@/contexts/language-context"
 
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const { t } = useLanguage()
+
+  const heroContent = [
+    {
+      title: t('hero.title1'),
+      subtitle: t('hero.subtitle1'),
+      description: t('hero.desc1'),
+      image: "/hero1.png"
+    },
+    {
+      title: t('hero.title2'),
+      subtitle: t('hero.subtitle2'),
+      description: t('hero.desc2'),
+      image: "/hero2.jpg"
+    }
+  ]
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,7 +54,7 @@ export default function Hero() {
   }
 
 
-
+ 
   const handleDownload = () => {
     const link = document.createElement('a')
     link.href = '/brochure.pdf'
@@ -121,19 +123,15 @@ export default function Hero() {
                     {currentContent.title}
                   </h1>
 
-                  {currentContent.subtitle && (
-                    <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white leading-tight mb-6">
-                      {currentContent.subtitle}
-                    </h2>
-                  )}
+                  
                   <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white leading-relaxed mb-8 max-w-2xl">
                     {currentContent.description}
                   </p>
                   <Link href="/contact" className="w-38 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors duration-300 inline-block text-center">
-                    Contact Us
+                    {t('hero.contact')}
                   </Link>
                   <button onClick={handleDownload} className="w-38 px-6 py-3 bg-orange-500 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors duration-300" suppressHydrationWarning>
-                    Brochure
+                    {t('hero.brochure')}
                   </button>
                 </div>
               </motion.div>  

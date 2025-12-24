@@ -3,6 +3,8 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import Image from "next/image"
+import { useLanguage } from "@/contexts/language-context"
+import { ChevronDown } from "lucide-react"
 
 interface NavbarProps {
   isScrolled: boolean
@@ -10,6 +12,8 @@ interface NavbarProps {
 
 export default function Navbar({ isScrolled }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false)
+  const { language, setLanguage, t } = useLanguage()
 
   return (
     <motion.nav
@@ -35,7 +39,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
             className="text-sm tracking-widest hover:text-primary transition-colors duration-300 relative group text-black"
             whileHover={{ y: -2 }}
           >
-            HOME
+            {t('nav.home')}
             <span className="absolute bottom-0 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
           </motion.a>
           <motion.a
@@ -43,7 +47,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
             className="text-sm tracking-widest hover:text-primary transition-colors duration-300 relative group text-black"
             whileHover={{ y: -2 }}
           >
-            PRODUCTS
+            {t('nav.products')}
             <span className="absolute bottom-0 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
           </motion.a>
           <motion.a
@@ -51,7 +55,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
             className="text-sm tracking-widest hover:text-primary transition-colors duration-300 relative group text-black"
             whileHover={{ y: -2 }}
           >
-            ABOUT
+            {t('nav.about')}
             <span className="absolute bottom-0 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
           </motion.a>
           <motion.a
@@ -59,21 +63,66 @@ export default function Navbar({ isScrolled }: NavbarProps) {
             className="text-sm tracking-widest hover:text-primary transition-colors duration-300 relative group text-black"
             whileHover={{ y: -2 }}
           >
-            CONTACT
+            {t('nav.contact')}
             <span className="absolute bottom-0 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
           </motion.a>
         </div>
 
-        {/* CTA Button */}
-        <motion.a
-          href="/quote"
-          className="hidden md:block px-4 lg:px-6 py-2 text-sm lg:text-base font-semibold tracking-wider transition-colors duration-300 rounded-sm bg-primary text-white hover:bg-accent"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
-          suppressHydrationWarning
-        >
-          REQUEST A QUOTE
-        </motion.a>
+        {/* Right Side - Quote Button and Language Switcher */}
+        <div className="hidden md:flex items-center gap-4">
+          <motion.a
+            href="/quote"
+            className="px-4 lg:px-6 py-2 text-sm lg:text-base font-semibold tracking-wider transition-colors duration-300 rounded-sm bg-primary text-white hover:bg-accent"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            suppressHydrationWarning
+          >
+            {t('nav.quote')}
+          </motion.a>
+          
+          {/* Language Switcher */}
+          <div className="relative">
+            <button
+              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+              className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+            >
+              <Image 
+                src={language === 'en' ? '/us-flag.svg' : '/fr-flag.svg'} 
+                alt={language === 'en' ? 'US Flag' : 'France Flag'}
+                width={20} 
+                height={15} 
+                className="rounded-full"
+              />
+              <span className="text-sm font-medium text-black">{language.toUpperCase()}</span>
+              <ChevronDown className="w-4 h-4 text-gray-500" />
+            </button>
+            
+            {langDropdownOpen && (
+              <div className="absolute top-full right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[120px]">
+                <button
+                  onClick={() => {
+                    setLanguage('en')
+                    setLangDropdownOpen(false)
+                  }}
+                  className="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-gray-50 first:rounded-t-lg"
+                >
+                  <Image src="/us-flag.svg" alt="US Flag" width={18} height={12} className="rounded-full" />
+                  <span className="text-sm text-black">EN</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setLanguage('fr')
+                    setLangDropdownOpen(false)
+                  }}
+                  className="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-gray-50 last:rounded-b-lg"
+                >
+                  <Image src="/fr-flag.svg" alt="France Flag" width={18} height={12} className="rounded-full" />
+                  <span className="text-sm text-black">FR</span>
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
 
         {/* Mobile Menu Button */}
         <motion.button
@@ -106,7 +155,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
                 onClick={() => setIsOpen(false)}
                 whileHover={{ x: 5 }}
               >
-                HOME
+                {t('nav.home')}
               </motion.a>
               <motion.a
                 href="/products"
@@ -114,7 +163,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
                 onClick={() => setIsOpen(false)}
                 whileHover={{ x: 5 }}
               >
-                PRODUCTS
+                {t('nav.products')}
               </motion.a>
               <motion.a
                 href="/about"
@@ -122,7 +171,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
                 onClick={() => setIsOpen(false)}
                 whileHover={{ x: 5 }}
               >
-                ABOUT
+                {t('nav.about')}
               </motion.a>
               <motion.a
                 href="/contact"
@@ -130,16 +179,60 @@ export default function Navbar({ isScrolled }: NavbarProps) {
                 onClick={() => setIsOpen(false)}
                 whileHover={{ x: 5 }}
               >
-                CONTACT
+                {t('nav.contact')}
               </motion.a>
+              
               <motion.a
                 href="/quote"
                 className="mt-4 px-6 py-2 bg-primary text-white font-semibold tracking-wider hover:bg-accent transition-colors duration-300 rounded-sm"
                 onClick={() => setIsOpen(false)}
                 suppressHydrationWarning
               >
-                REQUEST A QUOTE
+                {t('nav.quote')}
               </motion.a>
+              
+              {/* Mobile Language Switcher */}
+              <div className="relative mt-4">
+                <button
+                  onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                  className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 rounded-lg"
+                >
+                  <Image 
+                    src={language === 'en' ? '/us-flag.svg' : '/fr-flag.svg'} 
+                    alt={language === 'en' ? 'US Flag' : 'France Flag'}
+                    width={18} 
+                    height={12} 
+                    className="rounded-full"
+                  />
+                  <span className="text-sm font-medium text-black">{language.toUpperCase()}</span>
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                </button>
+                
+                {langDropdownOpen && (
+                  <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[120px]">
+                    <button
+                      onClick={() => {
+                        setLanguage('en')
+                        setLangDropdownOpen(false)
+                      }}
+                      className="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-gray-50 first:rounded-t-lg"
+                    >
+                      <Image src="/us-flag.svg" alt="US Flag" width={16} height={10} className="rounded-full" />
+                      <span className="text-sm text-black">EN</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        setLanguage('fr')
+                        setLangDropdownOpen(false)
+                      }}
+                      className="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-gray-50 last:rounded-b-lg"
+                    >
+                      <Image src="/fr-flag.svg" alt="France Flag" width={16} height={10} className="rounded-full" />
+                      <span className="text-sm text-black">FR</span>
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </motion.div>
         )}

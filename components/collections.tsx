@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { useState } from "react"
 import { useQuote } from "@/contexts/quote-context"
+import { useLanguage } from "@/contexts/language-context"
 
 type Product = {
   id: number
@@ -14,92 +15,261 @@ type Product = {
   image: string
 }
 
-const products: Product[] = [
-  { 
-    id: 1, 
-    title: "Round Brass Bush", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Material: Brass", "OD: 35 mm", "ID : 25 mm", "Length : 750 mm","Thickness : 9 mm"],
-    image: "/p1.jpg"
-  },
-  { 
-    id: 2, 
-    title: "Extension Connector Pipe", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Material: MS"],
-    image: "/p2.jpg"
-  },
-  { 
-    id: 3, 
-    title: "Motor Shaft", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Material: MS"],
-    image: "/p3.jpg"
-  },
-  { 
-    id: 4, 
-    title: "Bracket", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Material: MS", "Width : 70 mm", "Thickness : 38 mm", "Length : 25 mm"],
-    image: "/p4.jpg"
-  },
-  { 
-    id: 5, 
-    title: "Shaft Collar", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Material: EN418", "OD : 88 mm", "Thickness : 45 mm", "ID : 42 mm"],
-    image: "/p5.jpg"
-  },
-  { 
-    id: 6, 
-    title: "Rotary Sleeve", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Material: EN418", "OD : 70 mm", "Step OD : 38 mm", "ID : 25 mm"],
-    image: "/p6.jpg"
-  },
-  { 
-    id: 7, 
-    title: "RECT Pedestal CI Casting", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Material: MS", "Length : 105 mm", "Thickness : 25 mm", "Width : 75 mm"],
-    image: "/p7.jpg"
-  },
-  { 
-    id: 8, 
-    title: "Angle Brackets", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Material: MS", "OD : 88 mm", "ID : 38 mm", "Thickness : 60 mm"],
-    image: "/p8.jpg"
-  },
-  { 
-    id: 9, 
-    title: "Barrel Coolen Plate", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Thickness : 25 mm", "Width : 125 mm", "Length: 205 mm"],
-    image: "/p9.jpg"
-  },
-  { 
-    id: 10, 
-    title: "Flance", 
-    category: "General Precision Components",
-    description: "",
-    specifications: ["Material: EN8", "OD : 200 mm", "Step OD : 90 mm", "ID : 110 mm", "Length : 50 mm"],
-    image: "/p10.jpg"
-  },
-]
-
 export default function Collections() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const { addToQuote } = useQuote()
+  const { t, language } = useLanguage()
+  
+  const products: Product[] = [
+    {
+      id: 1,
+      title: t('products.adapter.title'),
+      category: t('collections.category'),
+      description: t('products.adapter.description'),
+      specifications: [t('products.adapter.spec1'), t('products.adapter.spec2'), t('products.adapter.spec3')],
+      image: "/mp1.jpg"
+    },
+    {
+      id: 2,
+      title: t('products.adgBlock.title'),
+      category: t('collections.category'),
+      description: t('products.adgBlock.description'),
+      specifications: [t('products.adgBlock.spec1'), t('products.adgBlock.spec2'), t('products.adgBlock.spec3'), t('products.adgBlock.spec4')],
+      image: "/mp2.jpg"
+    },
+    {
+      id: 3,
+      title: t('products.angleBrackets.title'),
+      category: t('collections.category'),
+      description: t('products.angleBrackets.description'),
+      specifications: [t('products.angleBrackets.spec1'), t('products.angleBrackets.spec2'), t('products.angleBrackets.spec3'), t('products.angleBrackets.spec4')],
+      image: "/mp3.jpg"
+    },
+    {
+      id: 4,
+      title: t('products.barrelCoolenPlate.title'),
+      category: t('collections.category'),
+      description: t('products.barrelCoolenPlate.description'),
+      specifications: [t('products.barrelCoolenPlate.spec1'), t('products.barrelCoolenPlate.spec2'), t('products.barrelCoolenPlate.spec3')],
+      image: "/mp4.jpg"
+    },
+    {
+      id: 5,
+      title: t('products.bracket.title'),
+      category: t('collections.category'),
+      description: t('products.bracket.description'),
+      specifications: [t('products.bracket.spec1'), t('products.bracket.spec2'), t('products.bracket.spec3'), t('products.bracket.spec4')],
+      image: "/mp5.jpg"
+    },
+    {
+      id: 6,
+      title: t('products.breakerPlate2.title'),
+      category: t('collections.category'),
+      description: t('products.breakerPlate2.description'),
+      specifications: [t('products.breakerPlate2.spec1'), t('products.breakerPlate2.spec2'), t('products.breakerPlate2.spec3'), t('products.breakerPlate2.spec4')],
+      image: "/mp6.jpg"
+    },
+    {
+      id: 7,
+      title: t('products.breakerPlates.title'),
+      category: t('collections.category'),
+      description: t('products.breakerPlates.description'),
+      specifications: [t('products.breakerPlates.spec1'), t('products.breakerPlates.spec2'), t('products.breakerPlates.spec3'), t('products.breakerPlates.spec4')],
+      image: "/mp7.jpg"
+    },
+    {
+      id: 8,
+      title: t('products.bsbHousing2.title'),
+      category: t('collections.category'),
+      description: t('products.bsbHousing2.description'),
+      specifications: [t('products.bsbHousing2.spec1'), t('products.bsbHousing2.spec2'), t('products.bsbHousing2.spec3'), t('products.bsbHousing2.spec4')],
+      image: "/mp8.jpg"
+    },
+    {
+      id: 9,
+      title: t('products.bsbHousingEN8.title'),
+      category: t('collections.category'),
+      description: t('products.bsbHousingEN8.description'),
+      specifications: [t('products.bsbHousingEN8.spec1'), t('products.bsbHousingEN8.spec2'), t('products.bsbHousingEN8.spec3'), t('products.bsbHousingEN8.spec4')],
+      image: "/mp9.jpg"
+    },
+    {
+      id: 10,
+      title: t('products.bsbHousingLarge.title'),
+      category: t('collections.category'),
+      description: t('products.bsbHousingLarge.description'),
+      specifications: [t('products.bsbHousingLarge.spec1'), t('products.bsbHousingLarge.spec2'), t('products.bsbHousingLarge.spec3'), t('products.bsbHousingLarge.spec4'), t('products.bsbHousingLarge.spec5')],
+      image: "/mp10.jpg"
+    },
+    {
+      id: 11,
+      title: t('products.bsbHousingSmall.title'),
+      category: t('collections.category'),
+      description: t('products.bsbHousingSmall.description'),
+      specifications: [t('products.bsbHousingSmall.spec1'), t('products.bsbHousingSmall.spec2'), t('products.bsbHousingSmall.spec3')],
+      image: "/mp11.jpg"
+    },
+    {
+      id: 12,
+      title: t('products.bsbHousingExtended.title'),
+      category: t('collections.category'),
+      description: t('products.bsbHousingExtended.description'),
+      specifications: [t('products.bsbHousingExtended.spec1'), t('products.bsbHousingExtended.spec2'), t('products.bsbHousingExtended.spec3'), t('products.bsbHousingExtended.spec4')],
+      image: "/mp12.jpg"
+    },
+    {
+      id: 13,
+      title: t('products.camAssy.title'),
+      category: t('collections.category'),
+      description: t('products.camAssy.description'),
+      specifications: [],
+      image: "/mp13.jpg"
+    },
+    {
+      id: 14,
+      title: t('products.chainSprocketWheel.title'),
+      category: t('collections.category'),
+      description: t('products.chainSprocketWheel.description'),
+      specifications: [t('products.chainSprocketWheel.spec1'), t('products.chainSprocketWheel.spec2'), t('products.chainSprocketWheel.spec3'), t('products.chainSprocketWheel.spec4'), t('products.chainSprocketWheel.spec5')],
+      image: "/mp14.jpg"
+    },
+    {
+      id: 15,
+      title: t('products.extensionConnectorPipe.title'),
+      category: t('collections.category'),
+      description: t('products.extensionConnectorPipe.description'),
+      specifications: [t('products.extensionConnectorPipe.spec1')],
+      image: "/mp15.jpg"
+    },
+    {
+      id: 16,
+      title: t('products.coolantPlate.title'),
+      category: t('collections.category'),
+      description: t('products.coolantPlate.description'),
+      specifications: [t('products.coolantPlate.spec1'), t('products.coolantPlate.spec2'), t('products.coolantPlate.spec3')],
+      image: "/mp16.jpg"
+    },
+    {
+      id: 17,
+      title: t('products.flance.title'),
+      category: t('collections.category'),
+      description: t('products.flance.description'),
+      specifications: [t('products.flance.spec1'), t('products.flance.spec2'), t('products.flance.spec3'), t('products.flance.spec4'), t('products.flance.spec5')],
+      image: "/mp17.jpg"
+    },
+    {
+      id: 18,
+      title: t('products.indexingSleeve.title'),
+      category: t('collections.category'),
+      description: t('products.indexingSleeve.description'),
+      specifications: [t('products.indexingSleeve.spec1'), t('products.indexingSleeve.spec2'), t('products.indexingSleeve.spec3')],
+      image: "/mp18.jpg"
+    },
+    {
+      id: 19,
+      title: t('products.indexingSleeve2.title'),
+      category: t('collections.category'),
+      description: t('products.indexingSleeve2.description'),
+      specifications: [t('products.indexingSleeve2.spec1'), t('products.indexingSleeve2.spec2'), t('products.indexingSleeve2.spec3')],
+      image: "/mp19.jpg"
+    },
+    {
+      id: 20,
+      title: t('products.lockingPlate.title'),
+      category: t('collections.category'),
+      description: t('products.lockingPlate.description'),
+      specifications: [t('products.lockingPlate.spec1'), t('products.lockingPlate.spec2'), t('products.lockingPlate.spec3'), t('products.lockingPlate.spec4')],
+      image: "/mp20.jpg"
+    },
+    {
+      id: 21,
+      title: t('products.motorShaft.title'),
+      category: t('collections.category'),
+      description: t('products.motorShaft.description'),
+      specifications: [t('products.motorShaft.spec1')],
+      image: "/mp21.jpg"
+    },
+    {
+      id: 22,
+      title: t('products.nutEN8.title'),
+      category: t('collections.category'),
+      description: t('products.nutEN8.description'),
+      specifications: [t('products.nutEN8.spec1'), t('products.nutEN8.spec2'), t('products.nutEN8.spec3')],
+      image: "/mp22.jpg"
+    },
+    {
+      id: 23,
+      title: t('products.proxyMTG.title'),
+      category: t('collections.category'),
+      description: t('products.proxyMTG.description'),
+      specifications: [t('products.proxyMTG.spec1'), t('products.proxyMTG.spec2'), t('products.proxyMTG.spec3'), t('products.proxyMTG.spec4')],
+      image: "/mp23.jpg"
+    },
+    {
+      id: 24,
+      title: t('products.proxyMTG2.title'),
+      category: t('collections.category'),
+      description: t('products.proxyMTG2.description'),
+      specifications: [],
+      image: "/mp24.jpg"
+    },
+    {
+      id: 25,
+      title: t('products.rectPedestal.title'),
+      category: t('collections.category'),
+      description: t('products.rectPedestal.description'),
+      specifications: [t('products.rectPedestal.spec1'), t('products.rectPedestal.spec2'), t('products.rectPedestal.spec3'), t('products.rectPedestal.spec4')],
+      image: "/mp25.jpg"
+    },
+    {
+      id: 26,
+      title: t('products.rotarySleeve.title'),
+      category: t('collections.category'),
+      description: t('products.rotarySleeve.description'),
+      specifications: [t('products.rotarySleeve.spec1'), t('products.rotarySleeve.spec2'), t('products.rotarySleeve.spec3'), t('products.rotarySleeve.spec4')],
+      image: "/mp26.jpg"
+    },
+    {
+      id: 27,
+      title: t('products.roundBrassBush.title'),
+      category: t('collections.category'),
+      description: t('products.roundBrassBush.description'),
+      specifications: [t('products.roundBrassBush.spec1'), t('products.roundBrassBush.spec2'), t('products.roundBrassBush.spec3'), t('products.roundBrassBush.spec4'), t('products.roundBrassBush.spec5')],
+      image: "/mp27.jpg"
+    },
+    {
+      id: 28,
+      title: t('products.shaftCollar.title'),
+      category: t('collections.category'),
+      description: t('products.shaftCollar.description'),
+      specifications: [t('products.shaftCollar.spec1'), t('products.shaftCollar.spec2'), t('products.shaftCollar.spec3'), t('products.shaftCollar.spec4')],
+      image: "/mp28.jpg"
+    },
+    {
+      id: 29,
+      title: t('products.shaftTorque.title'),
+      category: t('collections.category'),
+      description: t('products.shaftTorque.description'),
+      specifications: [t('products.shaftTorque.spec1'), t('products.shaftTorque.spec2'), t('products.shaftTorque.spec3')],
+      image: "/mp29.jpg"
+    },
+    {
+      id: 30,
+      title: t('products.shinifyForkNut.title'),
+      category: t('collections.category'),
+      description: t('products.shinifyForkNut.description'),
+      specifications: [t('products.shinifyForkNut.spec1'), t('products.shinifyForkNut.spec2'), t('products.shinifyForkNut.spec3'), t('products.shinifyForkNut.spec4')],
+      image: "/mp30.jpg"
+    },
+    {
+      id: 31,
+      title: t('products.weldNeckFlange.title'),
+      category: t('collections.category'),
+      description: t('products.weldNeckFlange.description'),
+      specifications: [t('products.weldNeckFlange.spec1'), t('products.weldNeckFlange.spec2'), t('products.weldNeckFlange.spec3')],
+      image: "/mp31.jpg"
+    }
+  ]
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -123,7 +293,6 @@ export default function Collections() {
   return (
     <section id="products" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-       
         <motion.div
           className="text-center mb-8 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -133,7 +302,7 @@ export default function Collections() {
         >
           
           <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 font-playfair">
-            Machined Parts Gallery
+            {t('collections.title')}
             <span className="block text-black"></span>
           </h3>
           <div className="w-16 sm:w-24 h-px bg-black mx-auto" />
@@ -199,12 +368,12 @@ export default function Collections() {
                   ×
                 </button>
                 
-                <div className="relative h-64 bg-gray-100">
+                <div className="relative h-96 bg-gray-100">
                   <Image
                     src={selectedProduct.image}
                     alt={selectedProduct.title}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
                 
@@ -220,7 +389,7 @@ export default function Collections() {
                   </p>
                   
                   <div className="border-t border-gray-200 pt-6">
-                    <h3 className="text-xl font-bold text-black mb-4">Specifications</h3>
+                    <h3 className="text-xl font-bold text-black mb-4">{t('collections.specs')}</h3>
                     <ul className="space-y-2">
                       {selectedProduct.specifications.map((spec: string, index: number) => (
                         <li key={index} className="flex items-center gap-3 text-gray-700">
@@ -234,18 +403,12 @@ export default function Collections() {
                   <div className="mt-8">
                     <button 
                       onClick={() => {
-                        addToQuote({
-                          id: selectedProduct.id,
-                          title: selectedProduct.title,
-                          category: selectedProduct.category,
-                          image: selectedProduct.image
-                        })
+                        addToQuote(selectedProduct)
                         setSelectedProduct(null)
-                        window.location.href = '/quote'
                       }}
-                      className="w-full px-6 py-3 bg-black text-white font-semibold tracking-wider hover:bg-gray-800 transition-colors rounded-sm"
+                      className="w-full px-6 py-3 bg-black text-white font-semibold tracking-wider hover:bg-gray-800 transition-colors"
                     >
-                      Request Quote
+                      {t('collections.addToQuote')}
                     </button>
                   </div>
                 </div>

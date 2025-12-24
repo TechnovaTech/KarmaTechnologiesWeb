@@ -3,8 +3,10 @@
 import { motion } from "framer-motion"
 import { useState, useRef } from "react"
 import React from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function ContactSection() {
+  const { t } = useLanguage()
   const [showSuccess, setShowSuccess] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
@@ -62,9 +64,9 @@ export default function ContactSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
-          <p className="text-muted-foreground text-lg mb-4">Have any queries?</p>
+          <p className="text-muted-foreground text-lg mb-4">{t('contact.section.query')}</p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 sm:mb-6 font-playfair">
-            We're here to help.
+            {t('contact.section.help')}
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto"></div>
         </motion.div>
@@ -81,10 +83,9 @@ export default function ContactSection() {
             className="space-y-8"
           >
             <div>
-              <p className="text-muted-foreground text-lg mb-4">Don't be a stranger!</p>
+              <p className="text-muted-foreground text-lg mb-4">{t('contact.section.stranger')}</p>
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-playfair">
-                Please drop your<br />
-                inquiry here
+                {t('contact.section.inquiry')}
               </h3>
             </div>
             
@@ -95,7 +96,7 @@ export default function ContactSection() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="bg-card p-6 border border-border rounded-lg shadow-sm"
             >
-              <h4 className="text-xl font-bold text-foreground mb-6">Contact Information</h4>
+              <h4 className="text-xl font-bold text-foreground mb-6">{t('contact.info.title')}</h4>
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -105,7 +106,7 @@ export default function ContactSection() {
                     </svg>
                   </div>
                   <div>
-                    <h5 className="font-semibold text-foreground mb-1">Address</h5>
+                    <h5 className="font-semibold text-foreground mb-1">{t('contact.info.address')}</h5>
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       2634 Rue Sabourin, Saint-Laurent,<br />QC, Canada H4S 1M2
                     </p>
@@ -119,7 +120,7 @@ export default function ContactSection() {
                     </svg>
                   </div>
                   <div>
-                    <h5 className="font-semibold text-foreground mb-1">Email</h5>
+                    <h5 className="font-semibold text-foreground mb-1">{t('contact.info.email')}</h5>
                     <p className="text-muted-foreground text-sm">
                       info.karmamechtech@gmail.com
                     </p>
@@ -133,7 +134,7 @@ export default function ContactSection() {
                     </svg>
                   </div>
                   <div>
-                    <h5 className="font-semibold text-foreground mb-1">Phone No</h5>
+                    <h5 className="font-semibold text-foreground mb-1">{t('contact.info.phone')}</h5>
                     <p className="text-muted-foreground text-sm">
                       +1(438)459-7766<br />
                       +1(438)459-7755
@@ -149,9 +150,9 @@ export default function ContactSection() {
                     </svg>
                   </div>
                   <div>
-                    <h5 className="font-semibold text-foreground mb-1">Business Hours</h5>
+                    <h5 className="font-semibold text-foreground mb-1">{t('contact.info.hours')}</h5>
                     <p className="text-muted-foreground text-sm">
-                      Monday - Sunday: 8:00 AM - 8:00 PM
+                      {t('contact.info.schedule')}
                     </p>
                   </div>
                 </div>
@@ -169,7 +170,7 @@ export default function ContactSection() {
               <input
                 type="text"
                 name="name"
-                placeholder="NAME"
+                placeholder={t('contact.form.name').toUpperCase()}
                 required
                 className="w-full p-4 bg-input border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                 suppressHydrationWarning
@@ -177,7 +178,7 @@ export default function ContactSection() {
               <input
                 type="text"
                 name="subject"
-                placeholder="SUBJECT"
+                placeholder={t('contact.form.subject').toUpperCase()}
                 required
                 className="w-full p-4 bg-input border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                 suppressHydrationWarning
@@ -185,14 +186,14 @@ export default function ContactSection() {
               <input
                 type="email"
                 name="email"
-                placeholder="EMAIL"
+                placeholder={t('contact.form.email').toUpperCase()}
                 required
                 className="w-full p-4 bg-input border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                 suppressHydrationWarning
               />
               <textarea
                 name="message"
-                placeholder="MESSAGE"
+                placeholder={t('contact.form.message').toUpperCase()}
                 rows={6}
                 required
                 className="w-full p-4 bg-input border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
@@ -203,7 +204,7 @@ export default function ContactSection() {
                 className="px-8 py-3 bg-primary text-primary-foreground font-semibold tracking-wider hover:bg-accent transition-colors duration-300 disabled:opacity-50"
                 suppressHydrationWarning
               >
-                {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
+                {isSubmitting ? t('contact.form.sending').toUpperCase() : t('contact.form.send').toUpperCase()}
               </button>
             </form>
           </motion.div>
@@ -220,7 +221,7 @@ export default function ContactSection() {
         >
           <div className="flex items-center gap-2">
             <span className="text-lg">✓</span>
-            <span className="font-semibold">Message sent to krimavadodariya07@gmail.com!</span>
+            <span className="font-semibold">{t('contact.success.message')}</span>
           </div>
         </motion.div>
       )}

@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function ContactHero() {
+  const { t } = useLanguage()
+  
   return (
     <section className="relative min-h-[400px] sm:min-h-[400px] md:min-h-[400px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -27,7 +30,7 @@ export default function ContactHero() {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold pt-20 text-white mb-4 sm:mb-6 md:mb-8 font-playfair">
-            Contact Us
+            {t('contact.hero.title')}
           </h1>
         </motion.div>
       </div>
