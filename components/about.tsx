@@ -73,7 +73,7 @@ export default function About() {
             >
               <div className="relative h-120 w-auto overflow-hidden">
                 <Image
-                  src="/about.jpg"
+                  src="/3.jpg"
                   alt="Industrial Machinery"
                   fill
                   className="object-cover"

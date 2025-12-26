@@ -13,11 +13,11 @@ const stats = [
 ]
 
 const slideImages = [
-  "/slide1.jpg",
-  "/slide2.jpg",
-  "/slide3.jpg",
-  "/slide4.png",
-  "/slide5.png"
+  "/4.png",
+  "/5.png",
+  "/6.png",
+  "/7.jpg",
+  "/8.jpg"
 ]
 
 const services = [

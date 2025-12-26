@@ -85,6 +85,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
             <button
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
               className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+              suppressHydrationWarning
             >
               <Image 
                 src={language === 'en' ? '/us-flag.svg' : '/fr-flag.svg'} 
@@ -124,21 +125,66 @@ export default function Navbar({ isScrolled }: NavbarProps) {
           </div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <motion.button
-          className="md:hidden flex flex-col gap-1.5"
-          onClick={() => setIsOpen(!isOpen)}
-          whileTap={{ scale: 0.95 }}
-          suppressHydrationWarning
-        >
-          <span
-            className={`w-6 h-px transition-all duration-300 bg-black ${isOpen ? "rotate-45 translate-y-2" : ""}`}
-          />
-          <span className={`w-6 h-px transition-all duration-300 bg-black ${isOpen ? "opacity-0" : ""}`} />
-          <span
-            className={`w-6 h-px transition-all duration-300 bg-black ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}
-          />
-        </motion.button>
+        {/* Mobile Language Switcher - Outside Toggle */}
+        <div className="md:hidden flex items-center gap-2">
+          <div className="relative">
+            <button
+              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+              className="flex items-center gap-1 px-2 py-1 bg-white border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+              suppressHydrationWarning
+            >
+              <Image 
+                src={language === 'en' ? '/us-flag.svg' : '/fr-flag.svg'} 
+                alt={language === 'en' ? 'US Flag' : 'France Flag'}
+                width={16} 
+                height={12} 
+                className="rounded-full"
+              />
+              <span className="text-xs font-medium text-black">{language.toUpperCase()}</span>
+            </button>
+            
+            {langDropdownOpen && (
+              <div className="absolute top-full right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[80px]">
+                <button
+                  onClick={() => {
+                    setLanguage('en')
+                    setLangDropdownOpen(false)
+                  }}
+                  className="flex items-center gap-2 w-full px-2 py-1 text-left hover:bg-gray-50 first:rounded-t-lg"
+                >
+                  <Image src="/us-flag.svg" alt="US Flag" width={14} height={10} className="rounded-full" />
+                  <span className="text-xs text-black">EN</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setLanguage('fr')
+                    setLangDropdownOpen(false)
+                  }}
+                  className="flex items-center gap-2 w-full px-2 py-1 text-left hover:bg-gray-50 last:rounded-b-lg"
+                >
+                  <Image src="/fr-flag.svg" alt="France Flag" width={14} height={10} className="rounded-full" />
+                  <span className="text-xs text-black">FR</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            className="flex flex-col gap-1.5"
+            onClick={() => setIsOpen(!isOpen)}
+            whileTap={{ scale: 0.95 }}
+            suppressHydrationWarning
+          >
+            <span
+              className={`w-6 h-px transition-all duration-300 bg-black ${isOpen ? "rotate-45 translate-y-2" : ""}`}
+            />
+            <span className={`w-6 h-px transition-all duration-300 bg-black ${isOpen ? "opacity-0" : ""}`} />
+            <span
+              className={`w-6 h-px transition-all duration-300 bg-black ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}
+            />
+          </motion.button>
+        </div>
 
         {/* Mobile Menu */}
         {isOpen && (
@@ -190,49 +236,6 @@ export default function Navbar({ isScrolled }: NavbarProps) {
               >
                 {t('nav.quote')}
               </motion.a>
-              
-              {/* Mobile Language Switcher */}
-              <div className="relative mt-4">
-                <button
-                  onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                  className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 rounded-lg"
-                >
-                  <Image 
-                    src={language === 'en' ? '/us-flag.svg' : '/fr-flag.svg'} 
-                    alt={language === 'en' ? 'US Flag' : 'France Flag'}
-                    width={18} 
-                    height={12} 
-                    className="rounded-full"
-                  />
-                  <span className="text-sm font-medium text-black">{language.toUpperCase()}</span>
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
-                </button>
-                
-                {langDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[120px]">
-                    <button
-                      onClick={() => {
-                        setLanguage('en')
-                        setLangDropdownOpen(false)
-                      }}
-                      className="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-gray-50 first:rounded-t-lg"
-                    >
-                      <Image src="/us-flag.svg" alt="US Flag" width={16} height={10} className="rounded-full" />
-                      <span className="text-sm text-black">EN</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        setLanguage('fr')
-                        setLangDropdownOpen(false)
-                      }}
-                      className="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-gray-50 last:rounded-b-lg"
-                    >
-                      <Image src="/fr-flag.svg" alt="France Flag" width={16} height={10} className="rounded-full" />
-                      <span className="text-sm text-black">FR</span>
-                    </button>
-                  </div>
-                )}
-              </div>
             </div>
           </motion.div>
         )}

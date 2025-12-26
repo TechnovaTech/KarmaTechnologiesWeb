@@ -15,13 +15,13 @@ export default function Hero() {
       title: t('hero.title1'),
       subtitle: t('hero.subtitle1'),
       description: t('hero.desc1'),
-      image: "/hero1.png"
+      image: "/1.png"
     },
     {
       title: t('hero.title2'),
       subtitle: t('hero.subtitle2'),
       description: t('hero.desc2'),
-      image: "/hero2.jpg"
+      image: "/2.png"
     }
   ]
 
@@ -53,8 +53,6 @@ export default function Hero() {
     },
   }
 
-
- 
   const handleDownload = () => {
     const link = document.createElement('a')
     link.href = '/brochure.pdf'
@@ -95,8 +93,6 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
-
-
       {/* Content */}
       <motion.div
         className="relative z-10  mx-auto px-4 sm:px-6 md:px-12"
@@ -122,15 +118,14 @@ export default function Hero() {
                   <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight mb-4">
                     {currentContent.title}
                   </h1>
-
                   
                   <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white leading-relaxed mb-8 max-w-2xl">
                     {currentContent.description}
                   </p>
-                  <Link href="/contact" className="w-38 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors duration-300 inline-block text-center">
+                  <Link href="/contact" className="w-auto px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors duration-300 inline-block text-center whitespace-nowrap">
                     {t('hero.contact')}
                   </Link>
-                  <button onClick={handleDownload} className="w-38 px-6 py-3 bg-orange-500 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors duration-300" suppressHydrationWarning>
+                  <button onClick={handleDownload} className="w-auto px-6 py-3 bg-orange-500 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors duration-300 whitespace-nowrap" suppressHydrationWarning>
                     {t('hero.brochure')}
                   </button>
                 </div>

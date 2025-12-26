@@ -12,7 +12,7 @@ export default function AboutHero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/AboutUsHero.png"
+          src="/10.jpg"
           alt="Industrial machinery"
           fill
           className="object-cover"

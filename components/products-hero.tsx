@@ -12,7 +12,7 @@ export default function ProductsHero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/ProductHero.png"
+          src="/9.jpg"
           alt="Manufacturing products"
           fill
           className="object-cover"

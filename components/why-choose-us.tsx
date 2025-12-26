@@ -70,7 +70,7 @@ export default function WhyChooseUs() {
           transition={{ duration: 0.8 }}
         >
          
-          <h3 className="text-5xl md:text-6xl font-bold text-black mb-4 font-playfair">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 font-playfair">
             {t('why.title')}
             <span className="block text-gray-600"></span>
           </h3>
@@ -78,7 +78,7 @@ export default function WhyChooseUs() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-6 gap-4 max-w-7xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -88,25 +88,25 @@ export default function WhyChooseUs() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="group text-center p-4 bg-white border border-black/10 hover:border-black transition-all duration-300 rounded-sm hover:shadow-lg"
+              className="group text-center p-4 sm:p-6 bg-white border border-black/10 hover:border-black transition-all duration-300 rounded-sm hover:shadow-lg"
               whileHover={{ y: -5 }}
             >
-              <div className="w-16 h-16 flex items-center justify-center mx-auto mb-3 overflow-hidden">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-3 overflow-hidden">
                 <Image
                   src={reason.image}
                   alt={reason.title}
                   width={64}
                   height={64}
-                  className="object-contain"
+                  className="object-contain w-full h-full"
                 />
               </div>
-              <h4 className="text-sm font-bold text-black mb-2 font-playfair">
+              <h4 className="text-xs sm:text-sm font-bold text-black mb-2 font-playfair">
                 {reason.title}
               </h4>
               <p className="text-xs text-gray-600 leading-relaxed">
                 {reason.description}
               </p>
-              <div className="w-12 h-px bg-black/30 mx-auto mt-6" />
+              <div className="w-8 sm:w-12 h-px bg-black/30 mx-auto mt-4 sm:mt-6" />
             </motion.div>
           ))}
         </motion.div>
