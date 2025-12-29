@@ -83,6 +83,9 @@ function CountingNumber({ target, suffix = "", duration = 2000 }: CountingNumber
 export default function Stats() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const { t } = useLanguage()
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchEnd, setTouchEnd] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -91,12 +94,52 @@ export default function Stats() {
     return () => clearInterval(interval)
   }, [])
 
+  const goToNext = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % slideImages.length)
+  }
+
   const goToPrevious = () => {
     setCurrentImageIndex((prev) => (prev - 1 + slideImages.length) % slideImages.length)
   }
 
-  const goToNext = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % slideImages.length)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe) goToNext()
+    if (isRightSwipe) goToPrevious()
+  }
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true)
+    setTouchStart(e.clientX)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return
+    setTouchEnd(e.clientX)
+  }
+
+  const handleMouseUp = () => {
+    if (!isDragging) return
+    setIsDragging(false)
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe) goToNext()
+    if (isRightSwipe) goToPrevious()
   }
 
   const containerVariants = {
@@ -152,13 +195,22 @@ export default function Stats() {
             </motion.div>
 
             {/* Right Image Slideshow */}
-            <motion.div variants={itemVariants} className="relative h-[500px] overflow-hidden rounded-lg group">
+            <motion.div 
+              variants={itemVariants} 
+              className="relative h-[500px] overflow-hidden rounded-lg cursor-grab active:cursor-grabbing select-none"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+            >
               <motion.div
                 key={currentImageIndex}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="absolute inset-0"
               >
                 <Image
@@ -168,27 +220,6 @@ export default function Stats() {
                   className="object-cover"
                 />
               </motion.div>
-              
-              {/* Navigation Buttons */}
-              <button
-                onClick={goToPrevious}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
-                aria-label="Previous image"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              
-              <button
-                onClick={goToNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
-                aria-label="Next image"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
               
               {/* Slide Indicators */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
