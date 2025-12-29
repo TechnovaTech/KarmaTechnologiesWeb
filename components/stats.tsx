@@ -87,9 +87,17 @@ export default function Stats() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % slideImages.length)
-    }, 6000)
+    }, 3000)
     return () => clearInterval(interval)
   }, [])
+
+  const goToPrevious = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + slideImages.length) % slideImages.length)
+  }
+
+  const goToNext = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % slideImages.length)
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -144,7 +152,7 @@ export default function Stats() {
             </motion.div>
 
             {/* Right Image Slideshow */}
-            <motion.div variants={itemVariants} className="relative h-[500px] overflow-hidden rounded-lg">
+            <motion.div variants={itemVariants} className="relative h-[500px] overflow-hidden rounded-lg group">
               <motion.div
                 key={currentImageIndex}
                 initial={{ opacity: 0, scale: 1.1 }}
@@ -160,6 +168,41 @@ export default function Stats() {
                   className="object-cover"
                 />
               </motion.div>
+              
+              {/* Navigation Buttons */}
+              <button
+                onClick={goToPrevious}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                aria-label="Previous image"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              <button
+                onClick={goToNext}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                aria-label="Next image"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              
+              {/* Slide Indicators */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                {slideImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                      index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </motion.div>
           </motion.div>
         </div>
