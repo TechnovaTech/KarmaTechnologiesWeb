@@ -1,9 +1,24 @@
 import nodemailer from 'nodemailer'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   try {
-    const { formData, quoteItems } = await request.json()
+    const formData = await request.formData()
+    const formDataJson = JSON.parse(formData.get('formData') as string)
+    const quoteItems = JSON.parse(formData.get('quoteItems') as string)
+    
+    // Get uploaded files
+    const attachments = []
+    let fileIndex = 0
+    while (formData.get(`file_${fileIndex}`)) {
+      const file = formData.get(`file_${fileIndex}`) as File
+      const buffer = Buffer.from(await file.arrayBuffer())
+      attachments.push({
+        filename: file.name,
+        content: buffer
+      })
+      fileIndex++
+    }
     
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -13,61 +28,34 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // Generate products list HTML
     const productsHtml = quoteItems.map((item: any) => `
-      <tr style="border-bottom: 1px solid #eee;">
-        <td style="padding: 10px; text-align: left;">${item.title}</td>
-        <td style="padding: 10px; text-align: center;">${item.category}</td>
-        <td style="padding: 10px; text-align: center;">${item.quantity}</td>
-      </tr>
+      <tr><td>${item.title}</td><td>${item.category}</td><td>${item.quantity}</td></tr>
     `).join('')
 
-    const mailOptions = {
+    await transporter.sendMail({
       from: 'info.karmamechtech@gmail.com',
       to: 'info.karmamechtech@gmail.com',
-      subject: `Quote Request from ${formData.name} - Karma Mech Tech`,
+      subject: `Quote Request from ${formDataJson.name}`,
+      attachments: attachments,
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px;">
-          <h2 style="color: #000000;">New Quote Request - Karma Mech Tech</h2>
-          <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="margin-top: 0;">Customer Details:</h3>
-            <p><strong>Full Name:</strong> ${formData.name}</p>
-            <p><strong>Email Address:</strong> ${formData.email}</p>
-            <p><strong>Phone Number:</strong> ${formData.phone || 'Not provided'}</p>
-            <p><strong>Company Name:</strong> ${formData.company || 'Not provided'}</p>
-            ${formData.message ? `
-              <p><strong>Additional Requirements:</strong></p>
-              <div style="background: white; padding: 15px; border-radius: 5px; margin-top: 10px;">
-                ${formData.message.replace(/\n/g, '<br>')}
-              </div>
-            ` : ''}
-          </div>
-          
-          <h3>Requested Products:</h3>
-          <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-            <thead>
-              <tr style="background: #f0f0f0;">
-                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Product</th>
-                <th style="padding: 10px; text-align: center; border-bottom: 2px solid #ddd;">Category</th>
-                <th style="padding: 10px; text-align: center; border-bottom: 2px solid #ddd;">Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${productsHtml}
-            </tbody>
-          </table>
-          
-          <p style="color: #666; font-size: 12px;">Submitted on: ${new Date().toLocaleString()}</p>
-        </div>
+        <h2>Quote Request</h2>
+        <p><strong>Name:</strong> ${formDataJson.name}</p>
+        <p><strong>Email:</strong> ${formDataJson.email}</p>
+        <p><strong>Phone:</strong> ${formDataJson.phone || 'N/A'}</p>
+        <p><strong>Company:</strong> ${formDataJson.company || 'N/A'}</p>
+        <p><strong>Message:</strong> ${formDataJson.message || 'N/A'}</p>
+        ${attachments.length > 0 ? `<p><strong>Files:</strong> ${attachments.map(att => att.filename).join(', ')}</p>` : ''}
+        <h3>Products:</h3>
+        <table border="1">
+          <tr><th>Product</th><th>Category</th><th>Quantity</th></tr>
+          ${productsHtml}
+        </table>
       `
-    }
-
-    await transporter.sendMail(mailOptions)
-    console.log('✅ Quote request sent to info.karmamechtech@gmail.com!')
+    })
     
-    return Response.json({ success: true })
+    return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Quote Email Error:', error)
-    return Response.json({ success: false, error: error instanceof Error ? error.message : 'Unknown error' })
+    console.error('Email Error:', error)
+    return NextResponse.json({ success: false, error: String(error) }, { status: 500 })
   }
 }

@@ -1,9 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import { Trash2, Plus, Minus } from "lucide-react"
+import { Trash2, Plus, Minus, Upload, X } from "lucide-react"
 import { useQuote } from "@/contexts/quote-context"
 import { useLanguage } from "@/contexts/language-context"
 
@@ -20,6 +20,8 @@ export default function QuoteForm() {
   const { t } = useLanguage()
   const [showSuccess, setShowSuccess] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +29,15 @@ export default function QuoteForm() {
     company: "",
     message: ""
   })
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || [])
+    setUploadedFiles(prev => [...prev, ...files])
+  }
+
+  const removeFile = (index: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index))
+  }
 
   const updateQuantity = (id: number, change: number) => {
     const items = JSON.parse(localStorage.getItem("quoteItems") || "[]")
@@ -51,18 +62,24 @@ export default function QuoteForm() {
     setIsSubmitting(true)
     
     try {
+      const formDataToSend = new FormData()
+      formDataToSend.append('formData', JSON.stringify(formData))
+      formDataToSend.append('quoteItems', JSON.stringify(quoteItems))
+      
+      uploadedFiles.forEach((file, index) => {
+        formDataToSend.append(`file_${index}`, file)
+      })
+
       const response = await fetch('/api/quote', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ formData, quoteItems })
+        body: formDataToSend
       })
 
       if (response.ok) {
         setShowSuccess(true)
         localStorage.removeItem("quoteItems")
         setFormData({ name: "", email: "", phone: "", company: "", message: "" })
+        setUploadedFiles([])
         setTimeout(() => setShowSuccess(false), 5000)
       } else {
         alert('Failed to send quote request')
@@ -233,6 +250,48 @@ export default function QuoteForm() {
                   className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
                   suppressHydrationWarning
                 />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Attach Files
+                </label>
+                <div className="space-y-3">
+                  <div 
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-full px-4 py-6 border-2 border-dashed border-border rounded-lg bg-background hover:bg-accent/10 transition-colors cursor-pointer flex flex-col items-center gap-2"
+                  >
+                    <Upload className="w-6 h-6 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Click to upload files</span>
+                    <span className="text-xs text-muted-foreground">PDF, DOC, Images, CAD files</span>
+                  </div>
+                  
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    multiple
+                    onChange={handleFileUpload}
+                    className="hidden"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.dwg,.step,.stp,.iges,.igs"
+                  />
+                  
+                  {uploadedFiles.length > 0 && (
+                    <div className="space-y-2">
+                      {uploadedFiles.map((file, index) => (
+                        <div key={index} className="flex items-center justify-between p-2 bg-accent/10 rounded border">
+                          <span className="text-sm text-foreground truncate">{file.name}</span>
+                          <button
+                            type="button"
+                            onClick={() => removeFile(index)}
+                            className="text-red-500 hover:text-red-700 ml-2"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
               
               <button
