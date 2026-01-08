@@ -28,9 +28,13 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    const productsHtml = quoteItems.map((item: any) => `
-      <tr><td>${item.title}</td><td>${item.category}</td><td>${item.quantity}</td></tr>
-    `).join('')
+    const productsHtml = quoteItems && quoteItems.length > 0 ? quoteItems.map((item: any) => `
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 12px; text-align: left; border-right: 1px solid #ddd;">${item.title}</td>
+        <td style="padding: 12px; text-align: center; border-right: 1px solid #ddd;">${item.category}</td>
+        <td style="padding: 12px; text-align: center;">${item.quantity}</td>
+      </tr>
+    `).join('') : '<tr><td colspan="3" style="padding: 12px; text-align: center; color: #666;">No products selected</td></tr>'
 
     await transporter.sendMail({
       from: 'info.karmamechtech@gmail.com',

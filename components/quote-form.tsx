@@ -263,7 +263,7 @@ export default function QuoteForm() {
                   >
                     <Upload className="w-6 h-6 text-muted-foreground" />
                     <span className="text-sm text-muted-foreground">Click to upload files</span>
-                    <span className="text-xs text-muted-foreground">PDF, DOC, Images, CAD files</span>
+                    <span className="text-xs text-muted-foreground">Images (JPG, PNG, GIF), PDF, DOC, CAD files</span>
                   </div>
                   
                   <input
@@ -272,7 +272,7 @@ export default function QuoteForm() {
                     multiple
                     onChange={handleFileUpload}
                     className="hidden"
-                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.dwg,.step,.stp,.iges,.igs"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.bmp,.webp,.dwg,.step,.stp,.iges,.igs"
                   />
                   
                   {uploadedFiles.length > 0 && (
@@ -296,7 +296,7 @@ export default function QuoteForm() {
               
               <button
                 type="submit"
-                disabled={quoteItems.length === 0 || isSubmitting}
+                disabled={isSubmitting}
                 className="w-full px-6 py-4 bg-primary text-primary-foreground font-semibold tracking-wider hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-lg"
               >
                 {isSubmitting ? t('quote.form.sending') : t('quote.form.submit')}
